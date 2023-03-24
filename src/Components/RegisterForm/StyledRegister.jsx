@@ -156,9 +156,7 @@ export const ContFormRegister = styled.section`
       color: rgb(89, 126, 255);
     }
 
-    .terminos{
-      
-    }
+  
 
   }
 `;

@@ -12,7 +12,7 @@ import { m, domAnimation, LazyMotion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import bg from "./img/Group 9.png";
 import { Field, Form, Formik } from "formik";
-import { LoginValidationSchena } from "./ValidationLogin";
+import { LoginValidationSchena } from "./ValidationLogin"; 
 
 const botonVariants = {
   rest: {

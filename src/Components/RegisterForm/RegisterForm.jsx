@@ -12,35 +12,46 @@ import {
   RiLockPasswordLine,
 } from "react-icons/all";
 
+//Autenticacion firebase
+import { auth } from "../../Firebase/KeyFirebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import Modal from "react-modal";
+//Calendario formate
+const minDate = new Date();
+minDate.setFullYear(minDate.getFullYear() - 90);
+const maxDate = new Date();
+maxDate.setFullYear(maxDate.getFullYear() - 0);
+//InitialRegister
+const initialRegister = {
+  email: "",
+  date: "",
+  password: "",
+  genero: "",
+  username: "",
+  terminos: false,
+};
+
 function RegisterForm() {
-  const initialRegister = {
-    email: "",
-    date: "",
-    password: "",
-    genero: "",
-    username: "",
-    terminos: false,
-  };
+  const [userExisting, setUserExisting] = useState(false);
+  const [hiddenModal, setHiddenModal] = useState(false);
   const [inputFocus, setInputFocus] = useState({
     username: false,
     password: false,
     email: false,
   });
-
+  //-----------------
   const handleInputFocus = (e) => {
     const { name } = e.target;
     setInputFocus({ ...inputFocus, [name]: true });
   };
-
-  const minDate = new Date();
-  minDate.setFullYear(minDate.getFullYear() - 90);
-  const maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear() - 0);
-
-  const savedDatas = (values) => {
+  const handleSubmitRegister = async (values, { resetForm }) => {
+    const { email, date, password, genero, username, terminos } = values;
     console.log(values);
+    await registerUser(email, password);
+    resetForm();
+    return;
   };
-
   const getFieldClass = (touched, errors, name) => {
     if (touched[name] && errors[name]) {
       return "form-field error";
@@ -50,12 +61,33 @@ function RegisterForm() {
       return "form-field";
     }
   };
+  //----------------
+
+  const registerUser = async (email, password) => {
+    try {
+      const createUser = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(createUser);
+    } catch (error) {
+      const code = error.code;
+      if (code === "auth/email-already-in-use") {
+        return setUserExisting(true), setHiddenModal(true);
+      }
+    }
+  };
+
+  const closeExistingUser = () => {
+    return setHiddenModal(false) ;
+  };
 
   return (
     <div className="App">
       <ContFormRegister>
         <Formik
-          onSubmit={savedDatas}
+          onSubmit={handleSubmitRegister}
           initialValues={initialRegister}
           validationSchema={RegisterValidationSchena}
         >
@@ -180,6 +212,8 @@ function RegisterForm() {
             </Form>
           )}
         </Formik>
+
+        
       </ContFormRegister>
     </div>
   );
