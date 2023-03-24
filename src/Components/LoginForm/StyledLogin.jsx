@@ -82,7 +82,7 @@ export const ConteinerForm = styled.article`
         .contInputsDatas {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2.5rem;
           .txtError {
             background-color: #ff7094;
             border-radius: 0.1rem;
@@ -90,6 +90,7 @@ export const ConteinerForm = styled.article`
             text-align: center;
             font-size: 0.8rem;
             border-radius: 0.2rem;
+            padding: 0.1rem
           }
 
           .form-field {
@@ -105,7 +106,7 @@ export const ConteinerForm = styled.article`
             outline: none;
             border: 0.1rem solid #a62639;
             border-radius: 0.2rem;
-            color: rgba(89, 156, 255, 1);
+            color: rgba(89, 156, 255, 0);
           }
           #terminos {
             border-bottom: 0.1rem solid black;

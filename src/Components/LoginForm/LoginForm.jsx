@@ -31,7 +31,7 @@ const loginFormVariants = {
   hidden: {
     opacity: 0,
     transition: {
-      delay: 0.6,
+      delay: 0.2,
       type: "spring",
       damping: 10,
       stiffness: 100,
@@ -41,7 +41,7 @@ const loginFormVariants = {
     opacity: 1,
     transition: {
       type: "twenty",
-      delay: 0.2,
+      delay: 0,
     },
   },
   exit: {

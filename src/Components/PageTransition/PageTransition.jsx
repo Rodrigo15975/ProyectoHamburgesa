@@ -9,28 +9,28 @@ const pageTransition = {
 const variants = {
   enter: {
     opacity: 0,
-    width: "90%",
-    height: "90%",
+    opacity: 1,
+    opacity: 0,
   },
   center: {
     opacity: 1,
-    width: "100%",
-    height: "100%",
+    opacity: 1,
+    opacity: 1,
     transition: {
       duration: 0.2,
     },
   },
   exit: {
     opacity: 0,
-    width: 0,
-    height: 0,
+    opacity: 1,
+    opacity: 1,
   },
 };
 
 const PageTransition = ({ children }) => {
   return (
     <LazyMotion features={domAnimation}>
-      <m.article initial="enter" animate="center" exit="exit" variants={variants}>
+      <m.article initial="initial" animate="enter" exit="exit" variants={pageTransition}>
         {children}
       </m.article>
     </LazyMotion>

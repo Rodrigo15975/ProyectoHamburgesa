@@ -39,13 +39,12 @@ export const ContFormRegister = styled.section`
         font-size: 2rem;
         text-shadow: 0 0 3px #264653;
       }
-    }    
-    .close-register{
+    }
+    .close-register {
       position: absolute;
       right: 2rem;
       top: 2rem;
-      font-size: 1.4rem;
-      cursor: pointer;
+      font-size: 1.6rem;  
     }
     .cont-inputsData {
       display: flex;
@@ -103,6 +102,7 @@ export const ContFormRegister = styled.section`
       color: #ffff;
       text-align: center;
       font-size: 0.8rem;
+      padding: 0.2rem;
       border-radius: 0.2rem;
     }
 
@@ -117,16 +117,16 @@ export const ContFormRegister = styled.section`
       padding-top: 0.4rem;
       padding-left: 1rem;
       outline: none;
-      border: 0.1rem solid rgba(89, 126, 255, 1);
+      border: 0.1rem solid rgba(89, 126, 255, 0.01);
       border-radius: 0.2rem;
-      color: rgba(89, 156, 255, 1);
+      color: rgb(88 88 88);
       box-shadow: 0 0 4px rgb(89, 126, 255);
     }
-    #terminos{
+    #terminos {
       border-bottom: 0.1rem solid black;
       box-shadow: none;
     }
-   
+
     .form-field label {
       position: absolute;
       padding: 0.1rem;
@@ -155,8 +155,5 @@ export const ContFormRegister = styled.section`
       font-size: 1.2rem;
       color: rgb(89, 126, 255);
     }
-
-  
-
   }
 `;
