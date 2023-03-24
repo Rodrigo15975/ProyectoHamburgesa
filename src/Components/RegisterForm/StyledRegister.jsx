@@ -129,8 +129,8 @@ export const ContFormRegister = styled.section`
 
     .form-field label {
       position: absolute;
-      padding: 0.1rem;
-      top: -0.5rem;
+      padding: 0.2rem;
+      top: -0.7rem;
       left: 0.25rem;
       font-size: 0.9rem;
       color: #9b9b9b;

@@ -214,9 +214,7 @@ function RegisterForm() {
                     )}
                   </div>
                   <div className="cont-btnRegister">
-                    <button onClick={handleSubmit} type="submit">
-                      Enviar
-                    </button>
+                    <button onClick={handleSubmit} type="submit"> Registrarme  </button>
                   </div>
                 </div>
               </Form>
