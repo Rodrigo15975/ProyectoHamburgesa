@@ -17,6 +17,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import PageTransition from "../PageTransition/PageTransition";
 import { m} from "framer-motion";
 import { NavLink } from "react-router-dom";
+
 //Calendario formate
 const minDate = new Date();
 minDate.setFullYear(minDate.getFullYear() - 90);
@@ -71,6 +72,7 @@ function RegisterForm() {
         password
       );
       console.log(createUser);
+      alert("Verifique su email")
     } catch (error) {
       const code = error.code;
       if (code === "auth/email-already-in-use") {
@@ -85,6 +87,8 @@ function RegisterForm() {
 
   return (
     <>
+      <h2>Subtitulo</h2>
+      
       <PageTransition>
         <ContFormRegister>
           <Formik
