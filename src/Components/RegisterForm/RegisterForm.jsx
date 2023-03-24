@@ -1,158 +1,188 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import DelayChildren from "../DelayChildren/DelayChildre";
-import PageTransition from "../PageTransition/PageTransition";
-import { ContFormRegister } from "./StyledRegister";
-import { TextInput } from "../InputsLabelTop/Inputs";
-import Button from "../Button/Button";
-import { m, LazyMotion, domAnimation } from "framer-motion";
 import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
-import { Formik } from "formik";
+import { Formik, Field, Form } from "formik";
+import { RegisterValidationSchena } from "./ValidationFormRegister/ValidationRegister";
+import { ContFormRegister } from "./StyledRegister";
 import {
-  BsFillBackspaceFill,
-  FiUserCheck,
-  MdOutlineAlternateEmail,
+  FiUser,
+  GrClose,
+  MdAlternateEmail,
   RiLockPasswordLine,
 } from "react-icons/all";
-import { RegisterValidationSchena } from "./ValidationFormRegister/ValidationRegister";
 
-const botonVariants = {
-  rest: {
-    color: "white",
-    scale: 1,
-    boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)",
-  },
-  tap: {
-    color: "white",
-    scale: 0.9,
-    boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.2)",
-  },
-};
+function RegisterForm() {
+  const initialRegister = {
+    email: "",
+    date: "",
+    password: "",
+    genero: "",
+    username: "",
+    terminos: false,
+  };
+  const [inputFocus, setInputFocus] = useState({
+    username: false,
+    password: false,
+    email: false,
+  });
 
-const VariantsBackLogin = {
-  hover: { scale: 0.9 },
-  animate: {
-    scale: 1,
-  },
-};
+  const handleInputFocus = (e) => {
+    const { name } = e.target;
+    setInputFocus({ ...inputFocus, [name]: true });
+  };
 
-const defaultRegister = {
-  username: "",
-  email: "",
-  password: "",
-  date: new Date(),
-  genero: "",
-};
+  const minDate = new Date();
+  minDate.setFullYear(minDate.getFullYear() - 90);
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 0);
 
-const RegisterForm = () => {
-  const Data = (values) => {
+  const savedDatas = (values) => {
     console.log(values);
   };
 
+  const getFieldClass = (touched, errors, name) => {
+    if (touched[name] && errors[name]) {
+      return "form-field error";
+    } else if (touched[name] && !errors[name]) {
+      return "form-field value";
+    } else {
+      return "form-field";
+    }
+  };
+
   return (
-    <>
-      <LazyMotion features={domAnimation}>
-        <PageTransition>
-          <ContFormRegister>
-            <div className="ContMainDataInput">
-              <m.span
-                className="BackLogin"
-                variants={VariantsBackLogin}
-                whileHover="hover"
-              >
-                <NavLink to={"/"}>
-                  <BsFillBackspaceFill />
-                </NavLink>
-              </m.span>
-              <div className="ContTitleForm">
-                <h2>Registro</h2>
+    <div className="App">
+      <ContFormRegister>
+        <Formik
+          onSubmit={savedDatas}
+          initialValues={initialRegister}
+          validationSchema={RegisterValidationSchena}
+        >
+          {({
+            handleSubmit,
+            getFieldProps,
+            values,
+            setFieldValue,
+            touched,
+            errors,
+          }) => (
+            <Form className="formRegister">
+              <GrClose className="close-register" />
+              <div className="cont-inputsData">
+                <div className="cont-title-register">
+                  <h2>Registro</h2>
+                </div>
+                <div className={getFieldClass(touched, errors, "username")}>
+                  <label htmlFor="username">Username</label>
+                  <Field
+                    {...getFieldProps("username")}
+                    type="text"
+                    name="username"
+                    id="username"
+                  />
+                  <FiUser className="icon-register" />
+                  {touched.username && errors.username && (
+                    <div className="txtError">{errors.username}</div>
+                  )}
+                </div>
+
+                <div className={getFieldClass(touched, errors, "password")}>
+                  <label htmlFor="password">Password</label>
+                  <Field
+                    {...getFieldProps("password")}
+                    type="password"
+                    name="password"
+                    id="password"
+                    onFocus={handleInputFocus}
+                  />
+                  <RiLockPasswordLine className="icon-register" />
+                  {touched.password && errors.password && (
+                    <div className="txtError">{errors.password}</div>
+                  )}
+                </div>
+                <div className={getFieldClass(touched, errors, "email")}>
+                  <label htmlFor="email">Email</label>
+                  <Field
+                    {...getFieldProps("email")}
+                    type="text"
+                    name="email"
+                    id="email"
+                    onFocus={handleInputFocus}
+                  />
+                  <MdAlternateEmail className="icon-register" />
+                  {touched.email && errors.email && (
+                    <div className="txtError">{errors.email}</div>
+                  )}
+                </div>
+                <div className="cont-genero">
+                  <label htmlFor="genero" className="register-label">
+                    Género
+                  </label>
+
+                  <Field
+                    {...getFieldProps("genero")}
+                    type="text"
+                    name="genero"
+                    id="genero"
+                    className="form-field input-register "
+                    as="select"
+                  >
+                    <option value="">Seleccione una opción</option>
+                    <option value="masculine">Masculino</option>
+                    <option value="femenine">Femenino</option>
+                    <option value="other">Otro</option>
+                  </Field>
+                  {touched.genero && errors.genero && (
+                    <div className="txtError">{errors.genero}</div>
+                  )}
+                </div>
+                <div className="cont-date">
+                  <label htmlFor="date" className="register-label">
+                    Fecha de nacimiento:
+                  </label>
+                  <DatePicker
+                    id="date-of-birth"
+                    //Es en select, no en value, importante
+                    selected={values.date}
+                    onChange={(date) => setFieldValue("date", date)}
+                    dateFormat="dd/MM/yyyy"
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                    minDate={minDate}
+                    maxDate={maxDate}
+                  />
+                  {touched.date && errors.date && (
+                    <div className="txtError">{errors.date}</div>
+                  )}
+                </div>
+                <div className="cont-terminos">
+                  <input
+                    type="checkbox"
+                    id="terminos"
+                    {...getFieldProps("terminos")}
+                  />
+                  <label htmlFor="terminos" className="terminos">
+                    Acepto términos y condiciones
+                  </label>
+                  {touched.terminos && errors.terminos && (
+                    <div className="txtError">{errors.terminos}</div>
+                  )}
+                </div>
+                <div className="cont-btnRegister">
+                  <button onClick={handleSubmit} type="submit">
+                    Enviar
+                  </button>
+                </div>
               </div>
-
-              <Formik onSubmit={Data} initialValues={defaultRegister}>
-                {({ handleSubmit, getFieldProps, values, setFieldValue }) => (
-                  
-                  <div className="ContInputs">
-                    <div className="DataInputs">
-                      <FiUserCheck className="userIcon  icon-register" />
-                      <MdOutlineAlternateEmail className="emailIcon  icon-register" />
-                      <RiLockPasswordLine className="passwordIcon  icon-register" />
-
-                      <DelayChildren
-                        tagParent={"div"}
-                        tagBoys={"div"}
-                        classParent={"InputsGap"}
-                        classBoys={"parentInputs"}
-                      >
-                        <TextInput
-                          label={"Your name / Username"}
-                          type="text"
-                          name={"username"}
-                          getFieldProps={getFieldProps}
-                        />
-
-                        <TextInput
-                          label={"Your email"}
-                          type="email"
-                          name={"email"}
-                        />
-                        <TextInput
-                          label={"Password"}
-                          type="password"
-                          name={"password"}
-                        />
-                        <label>
-                          Digite su fecha de nacimiento: día/mes/año
-                        </label>
-                        <DatePicker
-                          className="date"
-                          id="birthdate"
-                          dateFormat="dd/MM/yyyy"
-                          name="date"
-                        />
-                        <div className="contSexo">
-                          <select>
-                            <option value="">
-                              Select your sexual orientation
-                            </option>
-                            <option value="female">Female</option>
-                            <option value="masculine">Masculine</option>
-                            <option value="other">Other</option>
-                          </select>
-                        </div>
-                      </DelayChildren>
-                    </div>
-
-                    <div className="ContButtonRegisterAndTerms">
-                      <div className="ContTermins">
-                        <input type="checkbox" name="terms" id="terms" />
-                        <label htmlFor="terms">
-                          I agreee all statementes in terms of services
-                        </label>
-                      </div>
-                      <m.div
-                        variants={botonVariants}
-                        initial="rest"
-                        whileTap="tap"
-                        className="ContBtnRegister"
-                      >
-                        <button>Enviar</button>
-                      </m.div>
-                    </div>
-                  </div>
-                )}
-              </Formik>
-
-              <div className="ContHaveCount">
-                Have already an account ?
-                <NavLink to={"/"}> Login here </NavLink>
-              </div>
-            </div>
-          </ContFormRegister>
-        </PageTransition>
-      </LazyMotion>
-    </>
+            </Form>
+          )}
+        </Formik>
+      </ContFormRegister>
+    </div>
   );
-};
+}
 
 export default RegisterForm;

@@ -12,7 +12,26 @@ export const RegisterValidationSchena = yup.object().shape({
       ),
       "Debes ser mayor de 18 años para registrarte"
     )
-    .typeError("La fecha de nacimiento es requerida"),
+    .typeError("La fecha de nacimiento es requerida")
+    .test(
+      "is-valid-date",
+      "La fecha de nacimiento no es válida",
+      function (value) {
+        return value instanceof Date && !isNaN(value);
+      }
+    ),
+  terminos: yup
+    .boolean()
+    .oneOf([true], "Debes aceptar los términos y condiciones")
+    .required("Debes aceptar los términos y condiciones"),
+
+  genero: yup
+    .string()
+    .oneOf(
+      ["masculine", "femenine", "other"],
+      "Debe seleccionar un género válido"
+    )
+    .required("El género es obligatorio"),
 
   username: yup
     .string()

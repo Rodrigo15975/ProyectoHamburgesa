@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const ContFormRegister = styled.form`
+export const ContFormRegister = styled.section`
   max-width: 120rem;
   background: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.5) 30%,
-      rgba(0, 0, 0, 0.5) 100%
+      rgba(0, 0, 0, 0.1) 30%,
+      rgba(0, 0, 0, 0.1) 100%
     ),
     url("https://static-sevilla.abc.es/media/gurmesevilla/2014/10/hamburguesas.jpg");
   background-attachment: fixed;
@@ -14,144 +14,151 @@ export const ContFormRegister = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  .ContTitleForm {
-    font-size: 2rem;
-    color: rgb(0 0 0 / 63%);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    margin-bottom: 1rem;
+  .cont-title-empresa {
+    text-align: center;
+    padding-top: 1rem;
+    h2 {
+      font-size: 1.8rem;
+    }
   }
-  .ContMainDataInput {
-    box-shadow: -11px -1px 6px 3px rgba(0,0,0,0.43);
--webkit-box-shadow: -11px -1px 6px 3px rgba(0,0,0,0.43);
--moz-box-shadow: -11px -1px 6px 3px rgba(0,0,0,0.43);
+  .formRegister {
+    box-shadow: rgba(0, 0, 0, 0.43) -11px -1px 6px 3px;
     flex: 0 1 30rem;
-    min-height: 90vh;
+    background-color: white;
+    min-height: 80vh;
+    border-radius: 0.8rem;
     position: relative;
-    background-color: #fff;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0 6rem 0;
-    border-radius: 0.5rem;
-    .BackLogin {
+    .cont-title-register {
+      display: flex;
+      justify-content: center;
+
+      h2 {
+        color: #264653;
+        font-size: 2rem;
+        text-shadow: 0 0 3px #264653;
+      }
+    }    
+    .close-register{
       position: absolute;
       right: 2rem;
       top: 2rem;
-      font-size: 2.5rem;
-      svg {
-        color: #0007;
-      }
+      font-size: 1.4rem;
+      cursor: pointer;
     }
-
-    .ContInputs {
+    .cont-inputsData {
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      flex-direction: column;
-      align-content: center;
-
-      width: 75%;
-      .DataInputs {
-        width: 100%;
-        height: 100%;
-        position: relative;        
-        
-        .contSexo {
-          margin-top: 1.5rem;
-          width: 100%;
-          span {
-            padding: 0.5rem;
-          }
-          select {
-            padding: 0.5rem;
-            width: 100%;
-
-            outline: none;
-            border-color: rgb(203, 212, 251);
-            color: rgb(203, 212, 251);
-          }
-        }
-        svg {
-          position: absolute;
-          font-size: 1.6rem;
-          z-index: 1;
-          color: rgb(0, 0, 0, 0.63);
-        }
-        .userIcon {
-          top: 1.3rem;
-          right: 2rem;
-        }
-        .emailIcon {
-          top: 6rem;
-          right: 2rem;
-        }
-        .passwordIcon {
-          top: 11rem;
-          right: 2rem;
-        }
-        .RepasswordIcon {
-          top: 15.8rem;
-          right: 2rem;
-        }
-        .InputsGap {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          input {
-            border-radius: 0.5rem;
-            box-shadow: -5px 0px 1px rgb(203, 212, 251);
-            border-color: rgb(203, 212, 251);
-            transition: box-shadow 0.4s linear;
-            &:hover {
-              box-shadow: none;
-            }
-            .iconUsername {
-              position: absolute;
-            }
-          }
-
-          label {
-            color: rgb(203, 212, 251);
-            cursor: pointer;
-          }
-        }
-        .date{
-          width: 100%;
-          height: 2rem;
-        }
-
-      
-      }
-    }
-
-    .ContButtonRegisterAndTerms {
-      margin: 2rem 0 2rem 0;
-      display: flex;
-      flex-direction: column;
+      height: 80vh;
+      padding: 3.5rem;
       gap: 2rem;
-      .ContTermins {
-        display: flex;
-        text-align: center;
-        input {
-          height: 1.2rem;
-          width: 1.2rem;
+      .cont-genero {
+        select {
+          width: 100%;
+          border-color: rgba(89, 126, 255, 1);
+          color: " rgba(89,156,255,1)";
         }
       }
 
-      .ContBtnRegister {
+      .cont-date {
+        height: 4rem;
+        #date-of-birth {
+          height: 2rem;
+          color: rgba(89, 156, 255, 1);
+        }
+      }
+
+      .cont-terminos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        #terminos {
+          width: 3rem;
+        }
+      }
+      .cont-btnRegister {
         height: 3rem;
         button {
-          background: rgb(203, 212, 251);
+          height: 100%;
+          width: 100%;
+          color: white;
+          outline: none;
+          font-size: 1.1rem;
+          background: rgb(89, 126, 255);
           background: linear-gradient(
             90deg,
-            rgb(0 0 0 / 62%) 25%,
-            rgb(0 0 0 / 62%) 72%
+            rgba(89, 126, 255, 1) 35%,
+            rgba(116, 165, 255, 1) 100%
           );
-          font-size: 1.2rem;
         }
       }
     }
+
+    .txtError {
+      background-color: #ff7094;
+      border-radius: 0.1rem;
+      color: #ffff;
+      text-align: center;
+      font-size: 0.8rem;
+      border-radius: 0.2rem;
+    }
+
+    .form-field {
+      position: relative;
+      height: 2.5rem;
+    }
+
+    input {
+      width: 100%;
+      height: 100%;
+      padding-top: 0.4rem;
+      padding-left: 1rem;
+      outline: none;
+      border: 0.1rem solid rgba(89, 126, 255, 1);
+      border-radius: 0.2rem;
+      color: rgba(89, 156, 255, 1);
+      box-shadow: 0 0 4px rgb(89, 126, 255);
+    }
+    #terminos{
+      border-bottom: 0.1rem solid black;
+      box-shadow: none;
+    }
+   
+    .form-field label {
+      position: absolute;
+      padding: 0.1rem;
+      top: -0.5rem;
+      left: 0.25rem;
+      font-size: 0.9rem;
+      color: #9b9b9b;
+      background-color: rgb(89, 126, 255);
+      pointer-events: none;
+      transition: all 0.2s ease-out;
+      color: #ffff;
+      border-radius: 0.1rem;
+    }
+    .input-register {
+      color: rgba(89, 156, 255, 1);
+      position: relative;
+    }
+    .register-label {
+      color: rgb(89, 126, 255);
+    }
+
+    .icon-register {
+      position: absolute;
+      right: 1rem;
+      top: 0.5rem;
+      font-size: 1.2rem;
+      color: rgb(89, 126, 255);
+    }
+
+    .terminos{
+      
+    }
+
   }
 `;

@@ -43,31 +43,8 @@ h6 {
 button {
   border: none;
   outline: none;
-  font-family: sans-serif;
   font-weight: bold;
-  border-radius: 0.4rem;
-  color: #ffff;
+  border-radius: 0.4rem;  
   cursor: pointer;
 }
 
-.form-field {
-  position: relative;
-  margin-bottom: 1rem;
-}
-
-.form-field label {
-  position: absolute;
-  top: -0.5rem;
-  left: 0.75rem;
-  color: #777;
-  font-size: 0.75rem;
-  pointer-events: none;
-  transition: all 0.2s ease-out;
-}
-
-.form-field input:focus + label,
-.form-field + label {
-  top: -1.25rem;
-  font-size: 0.65rem;
-  color: #777;
-}

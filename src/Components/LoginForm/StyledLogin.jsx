@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { pxToRem } from "styled-media-query";
 import media from "styled-media-query";
 
-
 export const ConteinerForm = styled.article`
   max-width: 120rem;
   min-height: 100vh;
@@ -19,8 +18,8 @@ export const ConteinerForm = styled.article`
 
   .contBtnRegister {
     position: absolute;
-    right: .5rem;
-    top: .5rem;
+    right: 0.5rem;
+    top: 0.5rem;
     width: 15rem;
     height: 3rem;
     display: flex;
@@ -84,13 +83,55 @@ export const ConteinerForm = styled.article`
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
+          .txtError {
+            background-color: #ff7094;
+            border-radius: 0.1rem;
+            color: #ffff;
+            text-align: center;
+            font-size: 0.8rem;
+            border-radius: 0.2rem;
+          }
+
+          .form-field {
+            position: relative;
+            height: 2.9rem;
+          }
+
           input {
-            height: 4rem;
+            width: 100%;
+            height: 100%;
+            padding-top: 0.4rem;
             padding-left: 1rem;
-            border: none;
             outline: none;
-            border: 0.1rem solid #0002;
-            border-radius: 0.3rem;
+            border: 0.1rem solid #a62639;
+            border-radius: 0.2rem;
+            color: rgba(89, 156, 255, 1);
+          }
+          #terminos {
+            border-bottom: 0.1rem solid black;
+            box-shadow: none;
+          }
+
+          .form-field label {
+            position: absolute;
+            padding: 0.1rem;
+            top: -0.5rem;
+            left: 0.25rem;
+            font-size: 0.9rem;
+            color: #9b9b9b;
+            background-color: #a62639;
+            pointer-events: none;
+            transition: all 0.2s ease-out;
+            color: #ffff;
+            border-radius: 0.1rem;
+          }
+
+          .icon-login {
+            position: absolute;
+            right: 1rem;
+            top: 0.5rem;
+            font-size: 1.2rem;
+            color: #a62639;
           }
         }
         .contPasswordAndBox {
@@ -187,20 +228,15 @@ export const ConteinerForm = styled.article`
       object-fit: cover;
       object-position: center left;
       aspect-ratio: 16/9;
-     
 
       ${media.lessThan("64rem")`
           
           object-position: center right;
       `};
 
-
       ${media.lessThan("57.75rem")`          
           object-position: center left;
       `};
-
     }
-
-
   }
 `;
