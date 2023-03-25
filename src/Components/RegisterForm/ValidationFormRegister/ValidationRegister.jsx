@@ -1,6 +1,30 @@
 import * as yup from "yup";
 
 export const RegisterValidationSchena = yup.object().shape({
+  name: yup
+    .string()
+    .required("El nombre es obligatorio")
+    .test(
+      "longitud",
+      "El nombre debe tener minimo caracteres  4 y  máximo 50",
+      (value) => value.length >= 4 && value.length <= 50
+    )
+    .matches(
+      /^[a-zA-Z\s]+$/,
+      "El nombre solo puede contener letras y espacios"
+    ),
+  lastname: yup
+    .string()
+    .required("El apellido es obligatorio")
+    .test(
+      "longitud",
+      "El apellido debe tener entre 4 y 50 caracteres",
+      (value) => value.length >= 4 && value.length <= 50
+    )
+    .matches(
+      /^[a-zA-Z\s]+$/,
+      "El apellido solo puede contener letras y espacios"
+    ),
   date: yup
     .date()
     .required("La fecha de nacimiento es requerida")
@@ -23,7 +47,7 @@ export const RegisterValidationSchena = yup.object().shape({
   terminos: yup
     .boolean()
     .oneOf([true], "Debes aceptar los términos y condiciones")
-    .required("Debes aceptar los términos y condiciones"),
+    .required("Es necesario aceptar los términos y condiciones del registro"),
 
   genero: yup
     .string()
@@ -37,7 +61,7 @@ export const RegisterValidationSchena = yup.object().shape({
     .string()
     .matches(
       /^[A-Z][a-záéíóúüñ]+$/,
-      "El username debe comenzar con mayúscula y contener sólo letras"
+      "El username, solo debe contener letras y comenzar con una sola mayúscula"
     )
     .min(7, "Mínimo 7 caracteres")
     .max(20, "Máximo 20 caracteres")

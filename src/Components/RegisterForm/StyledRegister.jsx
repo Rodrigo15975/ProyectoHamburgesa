@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import bgRegister from "./img/photo-1491960693564-421771d727d6.webp";
 
 export const ContFormRegister = styled.section`
   max-width: 120rem;
@@ -7,9 +8,8 @@ export const ContFormRegister = styled.section`
       rgba(0, 0, 0, 0.1) 30%,
       rgba(0, 0, 0, 0.1) 100%
     ),
-    url("https://static-sevilla.abc.es/media/gurmesevilla/2014/10/hamburguesas.jpg");
-  background-attachment: fixed;
-  /* background-size: cover; */
+    url(${bgRegister});
+  background-position: center right;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@ export const ContFormRegister = styled.section`
       display: flex;
       flex-direction: column;
       justify-content: center;
-      height: 80vh;
+      min-height: 95vh;
       padding: 3.5rem;
       gap: 2rem;
       .cont-genero {

@@ -19,7 +19,7 @@ export const ConteinerForm = styled.article`
   .contBtnRegister {
     position: absolute;
     right: 0.5rem;
-    top: 0.5rem;
+    top: 2.5rem;
     width: 15rem;
     height: 3rem;
     display: flex;

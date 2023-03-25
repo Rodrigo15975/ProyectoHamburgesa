@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ConteinerForm } from "./StyledLogin";
 import {
   AiOutlineGoogle,
@@ -6,13 +6,15 @@ import {
   CiLogin,
   FaFacebookF,
   MdAlternateEmail,
+  MdOutlineMarkEmailUnread,
   RiLockPasswordLine,
 } from "react-icons/all";
 import { m, domAnimation, LazyMotion } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import bg from "./img/Group 9.png";
+import bg from "./img/group-9.webp";
 import { Field, Form, Formik } from "formik";
-import { LoginValidationSchena } from "./ValidationLogin"; 
+import { LoginValidationSchena } from "./ValidationLogin";
+import ModalMgs from "../ModalMgs/ModalMgs";
 
 const botonVariants = {
   rest: {
@@ -84,11 +86,11 @@ const LoginForm = ({ title, img, textLogin }) => {
   const savedDatas = (values) => {
     console.log(values);
   };
+  
 
   return (
-    <>
+    <>          
       <LazyMotion features={domAnimation}>
-
         <m.article
           variants={loginFormVariants}
           initial="hidden"

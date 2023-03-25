@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 import { Formik, Field, Form } from "formik";
 import { RegisterValidationSchena } from "./ValidationFormRegister/ValidationRegister";
@@ -15,8 +14,10 @@ import {
 import { auth } from "../../Firebase/KeyFirebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import PageTransition from "../PageTransition/PageTransition";
-import { m} from "framer-motion";
+import { m } from "framer-motion";
 import { NavLink } from "react-router-dom";
+
+import ModalMgs from "../../Components/ModalMgs/ModalMgs";
 
 //Calendario formate
 const minDate = new Date();
@@ -31,7 +32,10 @@ const initialRegister = {
   genero: "",
   username: "",
   terminos: false,
+  name: "",
+  lastname: "",
 };
+
 
 function RegisterForm() {
   const [userExisting, setUserExisting] = useState(false);
@@ -47,8 +51,19 @@ function RegisterForm() {
     setInputFocus({ ...inputFocus, [name]: true });
   };
   const handleSubmitRegister = async (values, { resetForm }) => {
-    const { email, date, password, genero, username, terminos } = values;
+    const {
+      email,
+      date,
+      password,
+      genero,
+      username,
+      terminos,
+      name,
+      lastname,
+    } = values;
+
     console.log(values);
+
     await registerUser(email, password);
     resetForm();
     return;
@@ -71,8 +86,7 @@ function RegisterForm() {
         email,
         password
       );
-      console.log(createUser);
-      alert("Verifique su email")
+      
     } catch (error) {
       const code = error.code;
       if (code === "auth/email-already-in-use") {
@@ -85,10 +99,18 @@ function RegisterForm() {
     return setHiddenModal(false);
   };
 
+  useEffect(() => {
+    
+
+
+  }, []);
+
   return (
     <>
-      <h2>Subtitulo</h2>
-      
+
+
+
+
       <PageTransition>
         <ContFormRegister>
           <Formik
@@ -105,12 +127,8 @@ function RegisterForm() {
               errors,
             }) => (
               <Form className="formRegister">
-                <m.span
-                  className="close-register"
-                  whileHover={{  scale: 0.8  }}
-                
-                >
-                  <NavLink to={"/"} >
+                <m.span className="close-register" whileHover={{ scale: 0.8 }}>
+                  <NavLink to={"/"}>
                     <GrClose />
                   </NavLink>
                 </m.span>
@@ -131,6 +149,34 @@ function RegisterForm() {
                       <div className="txtError">{errors.username}</div>
                     )}
                   </div>
+
+                  <div className={getFieldClass(touched, errors, "username")}>
+                    <label htmlFor="name">Name</label>
+                    <Field
+                      {...getFieldProps("name")}
+                      type="text"
+                      name="name"
+                      id="name"
+                    />
+                    <FiUser className="icon-register" />
+                    {touched.name && errors.name && (
+                      <div className="txtError">{errors.name}</div>
+                    )}
+                  </div>
+                  <div className={getFieldClass(touched, errors, "lastname")}>
+                    <label htmlFor="lastname">Last name</label>
+                    <Field
+                      {...getFieldProps("lastname")}
+                      type="text"
+                      name="lastname"
+                      id="lastname"
+                    />
+                    <FiUser className="icon-register" />
+                    {touched.lastname && errors.lastname && (
+                      <div className="txtError">{errors.lastname}</div>
+                    )}
+                  </div>
+
                   <div className={getFieldClass(touched, errors, "email")}>
                     <label htmlFor="email">Email</label>
                     <Field
@@ -159,7 +205,6 @@ function RegisterForm() {
                       <div className="txtError">{errors.password}</div>
                     )}
                   </div>
-
 
                   <div className="cont-genero">
                     <label htmlFor="genero" className="register-label">
@@ -218,7 +263,10 @@ function RegisterForm() {
                     )}
                   </div>
                   <div className="cont-btnRegister">
-                    <button onClick={handleSubmit} type="submit"> Registrarme  </button>
+                    <button onClick={handleSubmit} type="submit">
+                      {" "}
+                      Registrarme{" "}
+                    </button>
                   </div>
                 </div>
               </Form>
