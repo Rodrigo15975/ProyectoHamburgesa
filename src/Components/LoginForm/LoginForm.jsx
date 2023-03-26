@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ConteinerForm } from "./StyledLogin";
 import {
   AiOutlineGoogle,
   AiOutlineTwitter,
+  BiMessageError,
   CiLogin,
   FaFacebookF,
   MdAlternateEmail,
-  MdOutlineMarkEmailUnread,
   RiLockPasswordLine,
 } from "react-icons/all";
 import { m, domAnimation, LazyMotion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import bg from "./img/group-9.webp";
 import { Field, Form, Formik } from "formik";
 import { LoginValidationSchena } from "./ValidationLogin";
+import { auth } from "../../Firebase/KeyFirebase";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import ModalMgs from "../ModalMgs/ModalMgs";
 
 const botonVariants = {
@@ -55,41 +57,56 @@ const loginFormVariants = {
   },
 };
 
+const initialLogin = {
+  email: "",
+  password: "",
+};
+
+const getFieldClass = (touched, errors, name) => {
+  if (touched[name] && errors[name]) {
+    return "form-field error";
+  } else if (touched[name] && !errors[name]) {
+    return "form-field value";
+  } else {
+    return "form-field";
+  }
+};
+
 const LoginForm = ({ title, img, textLogin }) => {
-  const initialLogin = {
-    email: "",
-    password: "",
-  };
+  const [isverifiedEmail, setIsverifiedEmail] = useState(true);
+  const navigate = useNavigate();
 
-  const [inputFocus, setInputFocus] = useState({
-    username: false,
-    password: false,
-    email: false,
-  });
+  const handleLogin = async (data) => {
+    const { email, password } = data;
 
-  const getFieldClass = (touched, errors, name) => {
-    if (touched[name] && errors[name]) {
-      return "form-field error";
-    } else if (touched[name] && !errors[name]) {
-      return "form-field value";
-    } else {
-      return "form-field";
+    try {
+      const userLogin = await signInWithEmailAndPassword(auth, email, password);
+      const dataLogin = userLogin.user;
+
+      if (dataLogin.emailVerified) {
+        console.log("Bienvenido");
+        return;
+      }
+      setIsverifiedEmail(false);
+      return;
+    } catch (error) {
+      console.log(error);
     }
-    return;
   };
-  const handleInputFocus = (e) => {
-    const { name } = e.target;
-    setInputFocus({ ...inputFocus, [name]: true });
-    return;
+  //Cerrar isverifiedEmmail
+  const closeModalEmail = () => {
+    setIsverifiedEmail(true);
   };
+  //----------
 
-  const savedDatas = (values) => {
-    console.log(values);
-  };
-  
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 1500);
+  }, []);
 
   return (
-    <>          
+    <>
       <LazyMotion features={domAnimation}>
         <m.article
           variants={loginFormVariants}
@@ -97,40 +114,46 @@ const LoginForm = ({ title, img, textLogin }) => {
           animate="visible"
           exit={"exit"}
         >
+          {isverifiedEmail === false && (
+            <ModalMgs
+              OpeModal={isverifiedEmail}
+              title={"Verifique su email por favor"}
+              txt="Revise en su correo no deseado"
+              height={15}
+              width={15}
+              FunctionExit={closeModalEmail}
+              bg={"#ffff"}
+            >
+              <BiMessageError className="absolute" />
+            </ModalMgs>
+          )}
+
           <ConteinerForm>
             <m.div className="cont-imgForm" layout="position">
               <img className="img" src={bg} />
             </m.div>
             <Formik
-              onSubmit={savedDatas}
+              onSubmit={handleLogin}
               initialValues={initialLogin}
               validationSchema={LoginValidationSchena}
             >
-              {({
-                handleSubmit,
-                getFieldProps,
-                values,
-                setFieldValue,
-                touched,
-                errors,
-              }) => (
+              {({ handleSubmit, getFieldProps, touched, errors }) => (
                 <Form className="form">
-                  <div className="contBtnRegister">
-                    <m.span
-                      variants={botonVariants}
-                      initial="rest"
-                      whileTap="tap"
-                    >
-                      <NavLink
-                        className={"register-link"}
-                        to={"/form/register"}
-                      >
-                        <m.span>Register</m.span>
-                      </NavLink>
-                    </m.span>
-                  </div>
-
                   <div className="contDataForm">
+                    <div className="contBtnRegister">
+                      <m.span
+                        variants={botonVariants}
+                        initial="rest"
+                        whileTap="tap"
+                      >
+                        <NavLink
+                          className={"register-link"}
+                          to={"/form/register"}
+                        >
+                          <m.span>Register </m.span>
+                        </NavLink>
+                      </m.span>
+                    </div>
                     <div className="contLogin">
                       <div className="titleForm">
                         <h3>{title}</h3>
@@ -147,7 +170,6 @@ const LoginForm = ({ title, img, textLogin }) => {
                             type="text"
                             name="email"
                             id="email"
-                            onFocus={handleInputFocus}
                           />
                           <MdAlternateEmail className="icon-login" />
                           <div>
@@ -166,7 +188,6 @@ const LoginForm = ({ title, img, textLogin }) => {
                             type="password"
                             name="password"
                             id="password"
-                            onFocus={handleInputFocus}
                           />
                           <RiLockPasswordLine className="icon-login" />
                           <div>

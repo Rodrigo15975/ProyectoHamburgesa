@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { pxToRem } from "styled-media-query";
 import media from "styled-media-query";
 
 export const ConteinerForm = styled.article`
@@ -10,51 +9,17 @@ export const ConteinerForm = styled.article`
   justify-content: center;
   margin: auto;
   position: relative;
-
   ${media.lessThan("57.75rem")`
   flex-wrap: wrap;
  
  `};
 
-  .contBtnRegister {
-    position: absolute;
-    right: 0.5rem;
-    top: 2.5rem;
-    width: 15rem;
-    height: 3rem;
-    display: flex;
-
-    span {
-      width: 100%;
-      height: 100%;
-      background: #a62639;
-      border-radius: 0.5rem;
-      transition: background 0.3s linear;
-      &:hover {
-        background: rgb(174, 219, 238);
-      }
-    }
-    .register-link {
-      width: 100%;
-      height: 100%;
-      color: white;
-      span {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  }
   .form {
     padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 0 1 40rem;
-    position: relative;
     ${media.lessThan("57.75rem")`
     flex: 0 1 60rem;
     min-height: 100vh;
@@ -66,6 +31,39 @@ export const ConteinerForm = styled.article`
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;    
+      .contBtnRegister {
+        position: absolute;
+        width: 15rem;
+        height: 2.5rem;
+        display: flex;
+        top:-0.5rem;
+        right:0;
+        span {
+          width: 100%;
+          height: 100%;
+          background: #a62639;
+          border-radius: 0.5rem;
+          transition: background 0.3s linear;
+          &:hover {
+            background: rgb(174, 219, 238);
+          }
+        }
+        .register-link {
+          width: 100%;
+          height: 100%;
+          color: white;
+          span {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+
       .contLogin {
         flex: 0 1 24rem;
         display: flex;
@@ -90,7 +88,7 @@ export const ConteinerForm = styled.article`
             text-align: center;
             font-size: 0.8rem;
             border-radius: 0.2rem;
-            padding: 0.1rem
+            padding: 0.1rem;
           }
 
           .form-field {
@@ -106,7 +104,7 @@ export const ConteinerForm = styled.article`
             outline: none;
             border: 0.1rem solid #a62639;
             border-radius: 0.2rem;
-            color: rgba(89, 156, 255, 0);
+            color: rgba(89, 156, 255, 1);
           }
           #terminos {
             border-bottom: 0.1rem solid black;

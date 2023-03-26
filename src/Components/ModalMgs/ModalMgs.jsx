@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import styled from "styled-components";
-import { m} from "framer-motion";
+import { m } from "framer-motion";
 export const Conteiner = styled.aside`
   position: fixed;
   inset: 0;
@@ -28,13 +28,13 @@ export const ConteinerModal = styled.div`
     text-align: center;
     justify-content: center;
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: #646464;
     }
     p {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: rgb(255 25 99);
-      text-shadow: 0 0 2px ;
+      text-shadow: 0 0 2px;
     }
   }
   .absolute {
@@ -52,24 +52,42 @@ export const ConteinerModal = styled.div`
   }
 `;
 
-const ModalMgs = ({ height, bg, width, title, txt, children, FunctionExit, OpeModal }) => {
+const ModalMgs = ({
+  height,
+  bg,
+  width,
+  title,
+  txt,
+  children,
+  FunctionExit,
+  OpeModal,
+}) => {
   return (
     <>
       <Conteiner>
-        <ConteinerModal height={height} bg={bg} width={width}>
-          <div className="subConteiner">
-            <h2>{title}</h2>
-            <p>{txt}</p>
-            <m.span className="exitClose" whileHover={{scale: 0.8}}  onClick={FunctionExit} Open={OpeModal} >
-              <AiFillCloseCircle  />
-            </m.span>
-            <div className="cont-icon">
-
-            {children}
-            
+        <m.article
+          key={"modal"}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <ConteinerModal height={height} bg={bg} width={width}>
+            <div className="subConteiner">
+              <h2>{title}</h2>
+              <p>{txt}</p>
+              <m.span
+                className="exitClose"
+                whileHover={{ scale: 0.8 }}
+                onClick={FunctionExit}
+                Open={OpeModal}
+              >
+                <AiFillCloseCircle />
+              </m.span>
+              <div className="cont-icon">{children}</div>
             </div>
-          </div>
-        </ConteinerModal>
+          </ConteinerModal>
+        </m.article>
       </Conteiner>
     </>
   );

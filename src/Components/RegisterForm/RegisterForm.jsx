@@ -5,17 +5,25 @@ import { Formik, Field, Form } from "formik";
 import { RegisterValidationSchena } from "./ValidationFormRegister/ValidationRegister";
 import { ContFormRegister } from "./StyledRegister";
 import {
+  BiCommentError,
+  FaHamburger,
   FiUser,
   GrClose,
   MdAlternateEmail,
+  MdMarkEmailRead,
   RiLockPasswordLine,
 } from "react-icons/all";
 //Autenticacion firebase
 import { auth } from "../../Firebase/KeyFirebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  fetchSignInMethodsForEmail,
+  updateProfile,
+} from "firebase/auth";
 import PageTransition from "../PageTransition/PageTransition";
 import { m } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import ModalMgs from "../../Components/ModalMgs/ModalMgs";
 
@@ -24,6 +32,16 @@ const minDate = new Date();
 minDate.setFullYear(minDate.getFullYear() - 90);
 const maxDate = new Date();
 maxDate.setFullYear(maxDate.getFullYear() - 0);
+
+const getFieldClass = (touched, errors, name) => {
+  if (touched[name] && errors[name]) {
+    return "form-field error";
+  } else if (touched[name] && !errors[name]) {
+    return "form-field value";
+  } else {
+    return "form-field";
+  }
+};
 //InitialRegister
 const initialRegister = {
   email: "",
@@ -36,82 +54,90 @@ const initialRegister = {
   lastname: "",
 };
 
-
 function RegisterForm() {
   const [userExisting, setUserExisting] = useState(false);
   const [hiddenModal, setHiddenModal] = useState(false);
-  const [inputFocus, setInputFocus] = useState({
-    username: false,
-    password: false,
-    email: false,
-  });
+  const navigate = useNavigate();
+
   //-----------------
-  const handleInputFocus = (e) => {
-    const { name } = e.target;
-    setInputFocus({ ...inputFocus, [name]: true });
-  };
-  const handleSubmitRegister = async (values, { resetForm }) => {
-    const {
-      email,
-      date,
-      password,
-      genero,
-      username,
-      terminos,
-      name,
-      lastname,
-    } = values;
-
-    console.log(values);
-
-    await registerUser(email, password);
-    resetForm();
+  const handleSubmitRegister = async (data, { resetForm }) => {
+    await registerUser(data, resetForm);
     return;
-  };
-  const getFieldClass = (touched, errors, name) => {
-    if (touched[name] && errors[name]) {
-      return "form-field error";
-    } else if (touched[name] && !errors[name]) {
-      return "form-field value";
-    } else {
-      return "form-field";
-    }
   };
   //----------------
 
-  const registerUser = async (email, password) => {
+  const registerUser = async (data, resetForm) => {
     try {
+      const {
+        email,
+        date,
+        password,
+        genero,
+        username,
+        terminos,
+        name,
+        lastname,
+      } = data;
       const createUser = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      
+
+      const userData = createUser.user;
+      updateProfile(userData, { displayName: username });
+      sendEmailVerification(userData);
+      setHiddenModal(true);
+      resetForm();
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+
+      return;
     } catch (error) {
       const code = error.code;
       if (code === "auth/email-already-in-use") {
-        return setUserExisting(true), setHiddenModal(true);
+        return setUserExisting(true);
       }
     }
   };
+  //FUncioens para cerrar emailVerifid y userExiting
+  const closeVerifEmail = () => setHiddenModal(false);
+  const closeUserExiting = () => setUserExisting(false);
+  //---
 
-  const closeExistingUser = () => {
-    return setHiddenModal(false);
-  };
-
-  useEffect(() => {
-    
-
-
-  }, []);
-
+  useEffect(() => {}, []);
   return (
     <>
-
-
-
-
       <PageTransition>
+        {hiddenModal && (
+          <ModalMgs
+            OpeModal={hiddenModal}
+            FunctionExit={closeVerifEmail}
+            title="Gracias por registarte"
+            txt={"Verifique su email por favor (correo no deseado)"}
+            height={10}
+            width={20}
+            bg="#ffff"
+          >
+            <MdMarkEmailRead className="absolute" />
+          </ModalMgs>
+        )}
+
+        {userExisting && (
+          <ModalMgs
+            OpeModal={userExisting}
+            bg="#ffff"
+            height={10}
+            width={22}
+            title={"Email en uso"}
+            txt="Ingrese otro email por favor"
+            FunctionExit={closeUserExiting}
+          >
+            <BiCommentError className="absolute" />
+          </ModalMgs>
+        )}
+
         <ContFormRegister>
           <Formik
             onSubmit={handleSubmitRegister}
@@ -184,7 +210,6 @@ function RegisterForm() {
                       type="text"
                       name="email"
                       id="email"
-                      onFocus={handleInputFocus}
                     />
                     <MdAlternateEmail className="icon-register" />
                     {touched.email && errors.email && (
@@ -198,7 +223,6 @@ function RegisterForm() {
                       type="password"
                       name="password"
                       id="password"
-                      onFocus={handleInputFocus}
                     />
                     <RiLockPasswordLine className="icon-register" />
                     {touched.password && errors.password && (
@@ -264,8 +288,7 @@ function RegisterForm() {
                   </div>
                   <div className="cont-btnRegister">
                     <button onClick={handleSubmit} type="submit">
-                      {" "}
-                      Registrarme{" "}
+                      Registrarme
                     </button>
                   </div>
                 </div>

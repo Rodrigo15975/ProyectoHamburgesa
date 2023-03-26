@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Orienta&display=swap');
+
+:root{
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +23,23 @@ body {
   color: #333;
   overflow-x: hidden;
   min-height: 100vh;
+ 
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Define el color del scroll */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+/* Cambia el color del fondo del scroll cuando se mueve */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+
 img {
   max-width: 100%;
   height: auto;
