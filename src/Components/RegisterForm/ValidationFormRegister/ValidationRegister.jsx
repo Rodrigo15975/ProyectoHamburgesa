@@ -1,4 +1,15 @@
 import * as yup from "yup";
+import { query, where, getDocs, collection } from "firebase/firestore";
+import { dbFirestore } from "../../../Firebase/KeyFirebase";
+
+const isUsernameAvailable = async (username) => {
+  const q = query(
+    collection(dbFirestore, "users"),
+    where("username", "==", username.toLowerCase())
+  );
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.empty;
+};
 
 export const RegisterValidationSchena = yup.object().shape({
   name: yup
@@ -65,7 +76,12 @@ export const RegisterValidationSchena = yup.object().shape({
     )
     .required("El nombre de usuario es obligatorio")
     .min(7, "Mínimo 7 caracteres")
-    .max(20, "Máximo 20 caracteres"),
+    .max(20, "Máximo 20 caracteres")
+    .test(
+      "username-available",
+      "El nombre de usuario ya está en uso",
+      async (value) =>  isUsernameAvailable(value)      
+    ),
   email: yup
     .string()
     .matches(

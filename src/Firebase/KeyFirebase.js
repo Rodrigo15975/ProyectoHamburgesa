@@ -4,18 +4,19 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 import { getAuth } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAmIYrHEaDUCvWBCFb0fcm_-ImZ5ssMTZ0",
-  authDomain: "authroles-69f2b.firebaseapp.com",
-  projectId: "authroles-69f2b",
-  storageBucket: "authroles-69f2b.appspot.com",
-  messagingSenderId: "873036551376",
-  appId: "1:873036551376:web:6e6638ece502875d5ebad5"
+const firebaseWeb = {
+  apiKey: "AIzaSyDl7JJ47wTxWfM3Nwuj8aD30VK7smeWQnA",
+  authDomain: "login-63389.firebaseapp.com",
+  projectId: "login-63389",
+  storageBucket: "login-63389.appspot.com",
+  messagingSenderId: "369269699025",
+  appId: "1:369269699025:web:c00e3ef94ba7ffe11ab0f0"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseWeb);
 export const auth = getAuth(app);
+export const dbFirestore = getFirestore(app);

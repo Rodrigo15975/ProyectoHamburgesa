@@ -1,19 +1,16 @@
 import styled from "styled-components";
-import bgRegister from "./img/photo-1491960693564-421771d727d6.webp";
-
+import imgRegister from "./img/img-register.webp";
 export const ContFormRegister = styled.section`
   max-width: 120rem;
-  background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.1) 30%,
-      rgba(0, 0, 0, 0.1) 100%
-    ),
-    url(${bgRegister});
-  background-position: center right;
+
+  background-image: url(${imgRegister});
+  background-position: center center;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
   .cont-title-empresa {
     text-align: center;
     padding-top: 1rem;
@@ -21,8 +18,17 @@ export const ContFormRegister = styled.section`
       font-size: 1.8rem;
     }
   }
+  .cont-img-register {
+    height: 56rem;
+    background-color: black;
+    border-radius: 0.8rem;
+    img {
+      height: 100%;
+      border-radius: 0.8rem;
+    }
+  }
   .formRegister {
-    box-shadow: rgba(0, 0, 0, 0.43) -11px -1px 6px 3px;
+    box-shadow: rgba(0, 0, 0, 0.43) 0px -1px 6px 3px;
     flex: 0 1 30rem;
     background-color: white;
     min-height: 80vh;
@@ -35,16 +41,15 @@ export const ContFormRegister = styled.section`
       justify-content: center;
 
       h2 {
-        color: #264653;
+        color: rgb(120 155 255);
         font-size: 2rem;
-        text-shadow: 0 0 3px #264653;
       }
     }
     .close-register {
       position: absolute;
       right: 2rem;
       top: 2rem;
-      font-size: 1.6rem;  
+      font-size: 1.6rem;
     }
     .cont-inputsData {
       display: flex;
@@ -74,6 +79,7 @@ export const ContFormRegister = styled.section`
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        text-align: center;
         #terminos {
           width: 3rem;
         }
@@ -89,8 +95,8 @@ export const ContFormRegister = styled.section`
           background: rgb(89, 126, 255);
           background: linear-gradient(
             90deg,
-            rgba(89, 126, 255, 1) 35%,
-            rgba(116, 165, 255, 1) 100%
+            rgb(168 188 255) 35%,
+            rgb(176 204 255) 100%
           );
         }
       }
@@ -119,7 +125,7 @@ export const ContFormRegister = styled.section`
       outline: none;
       border: 0.1rem solid rgba(89, 126, 255, 0.01);
       border-radius: 0.2rem;
-      color: rgb(88 88 88);
+      color: rgb(57 54 255);
       box-shadow: 0 0 4px rgb(89, 126, 255);
     }
     #terminos {
@@ -130,14 +136,13 @@ export const ContFormRegister = styled.section`
     .form-field label {
       position: absolute;
       padding: 0.2rem;
-      top: -0.7rem;
+      top: -0.9rem;
       left: 0.25rem;
-      font-size: 0.9rem;
       color: #9b9b9b;
-      background-color: rgb(89, 126, 255);
+      background-color: #ffff;
       pointer-events: none;
       transition: all 0.2s ease-out;
-      color: #ffff;
+      color: rgb(0 0 0);
       border-radius: 0.1rem;
     }
     .input-register {
@@ -145,7 +150,7 @@ export const ContFormRegister = styled.section`
       position: relative;
     }
     .register-label {
-      color: rgb(89, 126, 255);
+      color: rgb(0 0 0);
     }
 
     .icon-register {

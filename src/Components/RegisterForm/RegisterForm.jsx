@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Formik, Field, Form } from "formik";
@@ -6,7 +6,6 @@ import { RegisterValidationSchena } from "./ValidationFormRegister/ValidationReg
 import { ContFormRegister } from "./StyledRegister";
 import {
   BiCommentError,
-  FaHamburger,
   FiUser,
   GrClose,
   MdAlternateEmail,
@@ -14,17 +13,23 @@ import {
   RiLockPasswordLine,
 } from "react-icons/all";
 //Autenticacion firebase
-import { auth } from "../../Firebase/KeyFirebase";
+import { auth, dbFirestore } from "../../Firebase/KeyFirebase";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
-  fetchSignInMethodsForEmail,
   updateProfile,
 } from "firebase/auth";
+//-------------------
+//----Firestore data base
+import {
+  setDoc,
+  doc,
+} from "firebase/firestore";
+
+//---
 import PageTransition from "../PageTransition/PageTransition";
 import { m } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
-
 import ModalMgs from "../../Components/ModalMgs/ModalMgs";
 
 //Calendario formate
@@ -32,7 +37,7 @@ const minDate = new Date();
 minDate.setFullYear(minDate.getFullYear() - 90);
 const maxDate = new Date();
 maxDate.setFullYear(maxDate.getFullYear() - 0);
-
+//---------------------
 const getFieldClass = (touched, errors, name) => {
   if (touched[name] && errors[name]) {
     return "form-field error";
@@ -68,27 +73,21 @@ function RegisterForm() {
 
   const registerUser = async (data, resetForm) => {
     try {
-      const {
-        email,
-        date,
-        password,
-        genero,
-        username,
-        terminos,
-        name,
-        lastname,
-      } = data;
+      const { email, password, username } = data;
       const createUser = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-
+      data.username = username.toLowerCase();
       const userData = createUser.user;
+      const uidUser = userData.uid;     
+      setUserExisting(false);
       updateProfile(userData, { displayName: username });
       sendEmailVerification(userData);
       setHiddenModal(true);
       resetForm();
+      sendDataRegister(data, uidUser);
       setTimeout(() => {
         navigate("/");
       }, 3000);
@@ -106,7 +105,36 @@ function RegisterForm() {
   const closeUserExiting = () => setUserExisting(false);
   //---
 
-  useEffect(() => {}, []);
+  const sendDataRegister = async (data, uid) => {
+    try {
+      const {
+        email,
+        date,
+        password,
+        genero,
+        username,
+        terminos,
+        name,
+        lastname,
+      } = data;
+      const refDoc = doc(dbFirestore, `users/${uid}`);
+      setDoc(refDoc, {
+        email,
+        date,
+        password,
+        genero,
+        username,
+        name,
+        lastname,
+        terminos,
+      });
+
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <PageTransition>
@@ -171,6 +199,7 @@ function RegisterForm() {
                       id="username"
                     />
                     <FiUser className="icon-register" />
+                    
                     {touched.username && errors.username && (
                       <div className="txtError">{errors.username}</div>
                     )}
@@ -257,8 +286,8 @@ function RegisterForm() {
                       Fecha de nacimiento:
                     </label>
                     <DatePicker
-                      id="date-of-birth"
                       //Es en select, no en value, importante
+
                       selected={values.date}
                       onChange={(date) => setFieldValue("date", date)}
                       dateFormat="dd/MM/yyyy"

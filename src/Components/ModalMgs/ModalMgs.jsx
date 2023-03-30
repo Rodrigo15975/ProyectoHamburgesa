@@ -49,6 +49,7 @@ export const ConteinerModal = styled.div`
     right: -1rem;
     font-size: 2.5rem;
     color: rgb(255 25 99);
+    cursor:pointer;
   }
 `;
 

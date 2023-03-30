@@ -114,9 +114,9 @@ export const ConteinerForm = styled.article`
           .form-field label {
             position: absolute;
             padding: 0.1rem;
-            top: -0.5rem;
+            top: -0.7rem;
             left: 0.25rem;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #9b9b9b;
             background-color: #a62639;
             pointer-events: none;

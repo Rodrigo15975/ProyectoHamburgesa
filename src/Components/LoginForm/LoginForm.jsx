@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState,  useEffect } from "react";
 import { ConteinerForm } from "./StyledLogin";
 import {
   AiOutlineGoogle,
@@ -72,7 +72,7 @@ const getFieldClass = (touched, errors, name) => {
   }
 };
 
-const LoginForm = ({ title, img, textLogin }) => {
+const LoginForm = ({ title, img, textLogin, setLoadingState }) => {
   const [isverifiedEmail, setIsverifiedEmail] = useState(true);
   const navigate = useNavigate();
 
@@ -83,8 +83,9 @@ const LoginForm = ({ title, img, textLogin }) => {
       const userLogin = await signInWithEmailAndPassword(auth, email, password);
       const dataLogin = userLogin.user;
 
-      if (dataLogin.emailVerified) {
-        console.log("Bienvenido");
+      if (dataLogin.emailVerified) {        
+        onAuthStateChanged(auth, )
+        console.log(dataLogin);
         return;
       }
       setIsverifiedEmail(false);
@@ -94,15 +95,19 @@ const LoginForm = ({ title, img, textLogin }) => {
     }
   };
   //Cerrar isverifiedEmmail
-  const closeModalEmail = () => {
-    setIsverifiedEmail(true);
-  };
+  const closeModalEmail = () =>  setIsverifiedEmail(true);  
   //----------
 
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
-    }, 1500);
+    }, 2000);
+    
+    setLoadingState(true);
+    setTimeout(() => {
+      setLoadingState(false);
+    }, 1000);
+
   }, []);
 
   return (
@@ -130,8 +135,8 @@ const LoginForm = ({ title, img, textLogin }) => {
 
           <ConteinerForm>
             <m.div className="cont-imgForm" layout="position">
-              <img className="img" src={bg} />
-            </m.div>
+              <img className="img" src={bg}  alt="Portada"  />
+            </m.div>       
             <Formik
               onSubmit={handleLogin}
               initialValues={initialLogin}
@@ -206,9 +211,7 @@ const LoginForm = ({ title, img, textLogin }) => {
                             type="checkbox"
                           />
                           <label
-                            htmlFor="remember"
-                            id="remember"
-                            name="remember"
+                            htmlFor="remember"                           
                           >
                             Remember me
                           </label>
@@ -235,8 +238,8 @@ const LoginForm = ({ title, img, textLogin }) => {
                       <hr />
                       <m.button
                         variants={botonVariants}
-                        initial="rest"
-                        whileTap="tap"
+                        initial="rest"                   
+                        whileTap={"tap"}
                         className="fb"
                         type="button"
                       >
