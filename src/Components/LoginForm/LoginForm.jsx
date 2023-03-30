@@ -1,4 +1,4 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ConteinerForm } from "./StyledLogin";
 import {
   AiOutlineGoogle,
@@ -72,7 +72,13 @@ const getFieldClass = (touched, errors, name) => {
   }
 };
 
-const LoginForm = ({ title, img, textLogin, setLoadingState }) => {
+const LoginForm = ({
+  title,
+  img,
+  textLogin,
+  setLoadingState,
+  setTokenUser,
+}) => {
   const [isverifiedEmail, setIsverifiedEmail] = useState(true);
   const navigate = useNavigate();
 
@@ -82,10 +88,11 @@ const LoginForm = ({ title, img, textLogin, setLoadingState }) => {
     try {
       const userLogin = await signInWithEmailAndPassword(auth, email, password);
       const dataLogin = userLogin.user;
-
-      if (dataLogin.emailVerified) {        
-        onAuthStateChanged(auth, )
-        console.log(dataLogin);
+      if (dataLogin.emailVerified) {
+        const tokenAcces = dataLogin.accessToken;   
+        onAuthStateChanged(auth, (user) =>
+          user ? setTokenUser(tokenAcces) :setTokenUser(null)
+        );
         return;
       }
       setIsverifiedEmail(false);
@@ -95,19 +102,18 @@ const LoginForm = ({ title, img, textLogin, setLoadingState }) => {
     }
   };
   //Cerrar isverifiedEmmail
-  const closeModalEmail = () =>  setIsverifiedEmail(true);  
+  const closeModalEmail = () => setIsverifiedEmail(true);
   //----------
 
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, document.body.scrollHeight);
     }, 2000);
-    
+
     setLoadingState(true);
     setTimeout(() => {
       setLoadingState(false);
     }, 1000);
-
   }, []);
 
   return (
@@ -135,8 +141,8 @@ const LoginForm = ({ title, img, textLogin, setLoadingState }) => {
 
           <ConteinerForm>
             <m.div className="cont-imgForm" layout="position">
-              <img className="img" src={bg}  alt="Portada"  />
-            </m.div>       
+              <img className="img" src={bg} alt="Portada" />
+            </m.div>
             <Formik
               onSubmit={handleLogin}
               initialValues={initialLogin}
@@ -210,11 +216,7 @@ const LoginForm = ({ title, img, textLogin, setLoadingState }) => {
                             name="remember"
                             type="checkbox"
                           />
-                          <label
-                            htmlFor="remember"                           
-                          >
-                            Remember me
-                          </label>
+                          <label htmlFor="remember">Remember me</label>
                         </div>
                         <div className="contPasswordRecoll">
                           <p>Forgot password</p>
@@ -238,7 +240,7 @@ const LoginForm = ({ title, img, textLogin, setLoadingState }) => {
                       <hr />
                       <m.button
                         variants={botonVariants}
-                        initial="rest"                   
+                        initial="rest"
                         whileTap={"tap"}
                         className="fb"
                         type="button"
