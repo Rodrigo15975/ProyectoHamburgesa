@@ -14,8 +14,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import bg from "./img/group-9.webp";
 import { Field, Form, Formik } from "formik";
 import { LoginValidationSchena } from "./ValidationLogin";
-import { auth } from "../../Firebase/KeyFirebase";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { Google, auth } from "../../Firebase/KeyFirebase";
+import { signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import ModalMgs from "../ModalMgs/ModalMgs";
 
 const botonVariants = {
@@ -73,8 +73,7 @@ const getFieldClass = (touched, errors, name) => {
 };
 
 const LoginForm = ({
-  title,
-  img,
+  title,  
   textLogin,
   setLoadingState,
   setTokenUser,
@@ -89,9 +88,13 @@ const LoginForm = ({
       const userLogin = await signInWithEmailAndPassword(auth, email, password);
       const dataLogin = userLogin.user;
       if (dataLogin.emailVerified) {
-        const tokenAcces = dataLogin.accessToken;   
+        const tokenAcces = dataLogin.accessToken;
+        sessionStorage.setItem("token", tokenAcces);
+        sessionStorage.setItem("username", dataLogin.displayName );
         onAuthStateChanged(auth, (user) =>
-          user ? setTokenUser(tokenAcces) :setTokenUser(null)
+          user
+            ? (navigate("/home"), setTokenUser(user))
+            : setTokenUser(null)
         );
         return;
       }
@@ -104,6 +107,18 @@ const LoginForm = ({
   //Cerrar isverifiedEmmail
   const closeModalEmail = () => setIsverifiedEmail(true);
   //----------
+
+  // Login Google
+  const loginGoogle = async () => {
+    try {
+     const userGoogle = await signInWithPopup(auth, Google);
+     console.log(userGoogle.user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  // ----------
 
   useEffect(() => {
     setTimeout(() => {
@@ -157,10 +172,7 @@ const LoginForm = ({
                         initial="rest"
                         whileTap="tap"
                       >
-                        <NavLink
-                          className={"register-link"}
-                          to={"/form/register"}
-                        >
+                        <NavLink className={"register-link"} to={"/register"}>
                           <m.span>Register </m.span>
                         </NavLink>
                       </m.span>
@@ -254,6 +266,7 @@ const LoginForm = ({
                         whileTap="tap"
                         className="google"
                         type="button"
+                        onClick={loginGoogle}
                       >
                         <AiOutlineGoogle /> Login with Google
                       </m.button>

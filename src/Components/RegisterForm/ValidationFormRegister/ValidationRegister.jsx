@@ -17,7 +17,7 @@ export const RegisterValidationSchena = yup.object().shape({
     .required("El nombre es obligatorio")
     .test(
       "longitud",
-      "El nombre debe tener minimo caracteres  4 y  máximo 50",
+      "El nombre debe tener minimo 4 caracteres y  máximo 20",
       (value) => value.length >= 4 && value.length <= 50
     )
     .matches(
