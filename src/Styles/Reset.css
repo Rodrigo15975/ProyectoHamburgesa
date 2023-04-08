@@ -1,7 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Orienta&display=swap');
-
-:root{
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kite+One&family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kreon:wght@500&family=Roboto:wght@300&display=swap');
+:root {
   scroll-behavior: smooth;
+  --step--2: clamp(0.91rem, calc(0.9rem + 0.05vw), 0.96rem);
+  --step--1: clamp(1.09rem, calc(1.07rem + 0.11vw), 1.2rem);
+  --step-0: clamp(1.31rem, calc(1.28rem + 0.19vw), 1.5rem);
+  --step-1: clamp(1.58rem, calc(1.52rem + 0.3vw), 1.88rem);
+  --step-2: clamp(1.89rem, calc(1.8rem + 0.45vw), 2.34rem);
+  --step-3: clamp(2.27rem, calc(2.14rem + 0.66vw), 2.93rem);
+  --step-4: clamp(2.72rem, calc(2.53rem + 0.94vw), 3.66rem);
+  --step-5: clamp(3.27rem, calc(3rem + 1.31vw), 4.58rem);
+  --step-6: clamp(3.92rem, calc(3.56rem + 1.8vw), 5.72rem);
+  --step-7: clamp(4.7rem, calc(4.21rem + 2.44vw), 7.15rem);
+  --step-8: clamp(5.64rem, calc(4.99rem + 3.29vw), 8.94rem);
+  --step-9: clamp(6.77rem, calc(5.89rem + 4.39vw), 11.18rem);
+  --step-10: clamp(8.13rem, calc(6.96rem + 5.83vw), 13.97rem);
 }
 
 * {
@@ -16,14 +34,16 @@
 
 /* Opcionalmente, se pueden agregar estilos globales para el cuerpo y los encabezados */
 
-body {
-  font-family: 'Orienta', sans-serif;
+html{
+  overflow-x: hidden;
+}
+
+body { 
   font-size: 16px;
   line-height: 1.5;
   color: #333;
   overflow-x: hidden;
   min-height: 100vh;
- 
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -38,7 +58,6 @@ body {
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1;
 }
-
 
 img {
   max-width: 100%;
@@ -59,13 +78,12 @@ h6 {
   font-family: inherit;
   font-weight: bold;
   line-height: 1.2;
-  margin-bottom: 1rem;
 }
 button {
   border: none;
   outline: none;
   font-weight: bold;
-  border-radius: 0.4rem;  
+  border-radius: 0.4rem;
   cursor: pointer;
 }
 

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import media from "styled-media-query";
-
 export const ConteinerForm = styled.article`
   max-width: 120rem;
   min-height: 100vh;
@@ -31,14 +30,14 @@ export const ConteinerForm = styled.article`
       display: flex;
       flex-direction: column;
       justify-content: center;
-      position: relative;    
+      position: relative;
       .contBtnRegister {
         position: absolute;
         width: 15rem;
         height: 2.5rem;
         display: flex;
-        top:-0.5rem;
-        right:0;
+        top: -0.5rem;
+        right: 0;
         span {
           width: 100%;
           height: 100%;

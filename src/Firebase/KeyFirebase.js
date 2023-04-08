@@ -22,3 +22,4 @@ const app = initializeApp(firebaseWeb);
 export const auth = getAuth(app);
 export const dbFirestore = getFirestore(app);
 export const Google = new GoogleAuthProvider();
+export const Facebok = new FacebookAuthProvider();
