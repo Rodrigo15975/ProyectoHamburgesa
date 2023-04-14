@@ -19,7 +19,7 @@ export const NavHome = styled.nav`
   position: relative;
   display: flex;
   justify-content: center;
-  background-color: rgb(255, 178, 62);
+  background-color: rgb(255 82 82);
 `;
 
 export const ContMainHome = styled.div`

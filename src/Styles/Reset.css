@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kite+One&family=Roboto+Slab&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kreon:wght@500&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 :root {
   scroll-behavior: smooth;
   --step--2: clamp(0.91rem, calc(0.9rem + 0.05vw), 0.96rem);

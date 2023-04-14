@@ -8,6 +8,7 @@ export const ConteinerForm = styled.article`
   justify-content: center;
   margin: auto;
   position: relative;
+  font-family: 'Itim', cursive;
   ${media.lessThan("57.75rem")`
   flex-wrap: wrap;
  
@@ -85,7 +86,6 @@ export const ConteinerForm = styled.article`
             border-radius: 0.1rem;
             color: #ffff;
             text-align: center;
-            font-size: 0.8rem;
             border-radius: 0.2rem;
             padding: 0.1rem;
           }
@@ -135,7 +135,7 @@ export const ConteinerForm = styled.article`
         .contPasswordAndBox {
           display: flex;
           justify-content: space-between;
-          margin-top: 1rem;
+          margin-top: 2rem;
           .contCheck {
             input {
               width: 1rem;

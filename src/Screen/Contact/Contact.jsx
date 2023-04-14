@@ -90,8 +90,8 @@ const Contact = () => {
             </div>
           </div>
         </ContMainContact>
-        <Footer/>
       </PageTransition>
+      <Footer />
     </>
   );
 };

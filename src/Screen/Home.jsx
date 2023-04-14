@@ -57,8 +57,39 @@ const Home = () => {
             </section>
 
             <section className="contBurgersPrices">
-              <div className="contClassicBurger">
-                <img src={Classic} alt="Classic Burger" />
+              {/* <div className="contClassicBurger">
+                <img src={Classic} alt="Classic Burger" />                
+              </div> */}
+              <div className="contCardBurger">
+                <div className="contBurgerEspecial">
+                  <div className="burgerEspecial">
+                    <p>Especial Burger</p>
+                  </div>
+                  <div className="burgerEspecial">
+                    <img src={bgThree} alt="burger Clasic" />
+                  </div>
+                  <div className="burgerEspecial">
+                    <button>
+                      {" "}
+                      <BsFillCartCheckFill /> Comprar ahora mismo
+                    </button>
+                  </div>
+                </div>
+
+                <div className="contBurgerEspecial">
+                  <div className="burgerEspecial">
+                    <p>Especial Burger</p>
+                  </div>
+                  <div className="burgerEspecial">
+                    <img src={bgTwo} alt="burger Classic" />
+                  </div>
+                  <div className="burgerEspecial">
+                    <button>
+                      {" "}
+                      <BsFillCartCheckFill /> Comprar ahora mismo
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div className="contCardBurger">
@@ -95,9 +126,8 @@ const Home = () => {
             </section>
           </article>
         </MainHome>
-          <Footer/>
-        
       </PageTransition>
+      <Footer />
     </>
   );
 };

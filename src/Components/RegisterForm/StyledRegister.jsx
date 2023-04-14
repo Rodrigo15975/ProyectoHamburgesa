@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import imgRegister from "./img/img-register.webp";
-export const ContFormRegister = styled.section`
-
-
-  max-width: 120rem;
-  
+export const ContFormRegister = styled.section` 
+  max-width: 120rem;  
   background-image: url(${imgRegister});
   background-position: center center;
   min-height: 100vh;
@@ -12,6 +9,7 @@ export const ContFormRegister = styled.section`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-family: 'Itim', cursive;
   padding: 0.5rem;
   .cont-title-empresa {
     text-align: center;
@@ -109,7 +107,7 @@ export const ContFormRegister = styled.section`
       border-radius: 0.1rem;
       color: #ffff;
       text-align: center;
-      font-size: 0.8rem;
+ 
       padding: 0.2rem;
       border-radius: 0.2rem;
     }

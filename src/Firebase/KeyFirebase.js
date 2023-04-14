@@ -3,9 +3,13 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
+import { getDatabase, set, ref, child, chi } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseWeb = {
@@ -14,7 +18,7 @@ const firebaseWeb = {
   projectId: "loginproviders-7c47b",
   storageBucket: "loginproviders-7c47b.appspot.com",
   messagingSenderId: "482779632394",
-  appId: "1:482779632394:web:c81a0814e59a8dd32e60f3"
+  appId: "1:482779632394:web:c81a0814e59a8dd32e60f3",
 };
 
 // Initialize Firebase

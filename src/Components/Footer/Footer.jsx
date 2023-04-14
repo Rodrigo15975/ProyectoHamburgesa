@@ -12,98 +12,95 @@ const Footer = () => {
   return (
     <>
       <ContMainFooter>
-        <div className="ConteinerInfoFooter">
-        
-          <div className="MainInfoFooter">
-            <div className="InfoFooter">
-              <div className="Info">
-                <img src={iconBurger} alt="burger" />
-                <p>Braun Burger</p>
+        <div className="FooterInfo">
+          <div className="MainFooter" > 
+
+            <div className="ContInfoFooter">
+              <div className="ContTxtBraun">
+                <div className="TitleFooter">
+                  <p>Braun Burger</p>
+                </div>
+                <div className="TxtFooter">
+                  <p className="txtFooter">
+                    Nos apasiona la comida y trabajamos arduamente para ofrecer
+                    hamburguesas frescas y sabrosas en cada orden.
+                  </p>
+                </div>
               </div>
 
-              <div className="TxtInfo">
-                <p>
-                  Nos apasiona la comida y trabajamos arduamente para ofrecer
-                  hamburguesas frescas y sabrosas en cada orden.{" "}
-                </p>
-              </div>
-            </div>
-            <div className="ContInfoExtra">
               <div className="contAbout">
-                <p>About</p>
+                <div className="About">
+                  <p>About</p>
+                </div>
+                <div className="AboutTxt">
+                  <p className="txtFooter">Home</p>
+                  <p className="txtFooter">Features</p>
+                  <p className="txtFooter">FAQs</p>
+                  <p className="txtFooter">Reviews</p>
+                  <p className="txtFooter">Stories</p>
+                </div>
               </div>
-              <div className="Extra">
-                <p>Home</p>
-                <p>Features</p>
-                <p>FAQs </p>
-                <p>Reviews</p>
-                <p>Stories</p>
+            </div>
+
+            <div className="ContInfoFooter ">
+
+              <div className="ContPrivacy">
+                <div className="Privacy">
+                  <p>Privacy</p>
+                </div>
+                <div className="TxtPrivacy">
+                  <p className="txtFooter">Privacy</p>
+                  <p className="txtFooter">Policy</p>
+                  <p className="txtFooter">Payment</p>
+                  <p className="txtFooter">Terms</p>
+                </div>
+
+              </div>
+              
+              <div className="ContContactsFooter">
+                <div className="ContactUs">
+                  <p>Contact Us</p>
+                </div>
+                <div className="ContactNumber">
+                  <p className="txtFooter">+51 931 022 090</p>
+                </div>
+                <div className="ConctGmail">
+                  <p className="txtFooter">Rodrigorumpler@gmail.com</p>
+                </div>
+                <div className="ConctRedes">
+                  <NavLink
+                    to={"https://www.facebook.com/Roller15975"}
+                    rel="noreferer"
+                    target="_blank"
+                  >
+                    <ImFacebook className="footerFB" />
+                  </NavLink>
+                  <NavLink
+                    to={"https://www.instagram.com/rumplerbraunrodrigo/"}
+                    rel="noreferer"
+                    target="_blank"
+                  >
+                    <FaInstagram className="footerIM" />
+                  </NavLink>
+
+                  <NavLink
+                    to={"https://wa.me/931022090"}
+                    rel="noreferer"
+                    target="_blank"
+                  >
+                    <BsWhatsapp className="footerWS" />
+                  </NavLink>
+                  <NavLink
+                    to={"https://twitter.com/RumplerRodrigo"}
+                    rel="noreferer"
+                    target="_blank"
+                  >
+                    <GrTwitter className="footerTwitter" />
+                  </NavLink>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="MainPrivacys" >
-
-            <div className="ContInfoPrivacys">
-              <div className="PrivacyInfo">
-                <p>Privacy</p>
-              </div>
-              <div className="PolicyTerms">
-                <p>Privacy</p>
-                <p>Policy</p>
-                <p>Payment</p>
-                <p>Terms</p>
-              </div>
-            </div>
-
-            <div className="ContContactsFooter">
-              <div className="contactUs">
-                <p>Contact Us</p>
-              </div>
-              <div className="number">
-                <p>+51 931 022 090</p>
-              </div>
-              <div className="gmail">
-                <p>Rodrigorumpler@gmail.com</p>
-              </div>
-
-              <div className="ContredesFooters">
-
-                <NavLink
-                  to={"https://www.facebook.com/Roller15975"}
-                  rel="noreferer"
-                  target="_blank"
-                >
-                  <ImFacebook className="footerFB" />
-                </NavLink>
-                <NavLink
-                  to={"https://www.instagram.com/rumplerbraunrodrigo/"}
-                  rel="noreferer"
-                  target="_blank"
-                >
-                  <FaInstagram className="footerIM" />
-                </NavLink>
-
-                <NavLink
-                  to={"https://wa.me/931022090"}
-                  rel="noreferer"
-                  target="_blank"
-                >
-                  <BsWhatsapp className="footerWS" />
-                </NavLink>
-                <NavLink
-                  to={"https://twitter.com/RumplerRodrigo"}
-                  rel="noreferer"
-                  target="_blank"
-                >
-                  <GrTwitter className="footerTwitter" />
-                </NavLink>
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
         <div className="ConteinerTerminosFooter">
           <div className="contCopy">
@@ -114,6 +111,7 @@ const Footer = () => {
             <p>Terms</p>
           </div>
         </div>
+
       </ContMainFooter>
     </>
   );

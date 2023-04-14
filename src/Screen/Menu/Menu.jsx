@@ -8,8 +8,8 @@ const Menu = () => {
     <>
       <PageTransition>
         <MainMenu>Menu</MainMenu>
-        <Footer/>
       </PageTransition>
+      <Footer />
     </>
   );
 };

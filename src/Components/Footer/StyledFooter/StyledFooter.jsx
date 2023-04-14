@@ -3,189 +3,165 @@ import media from "styled-media-query";
 
 export const ContMainFooter = styled.footer`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 120rem;
   min-height: 30rem;
   justify-content: center;
   padding: 0 2rem 0 2rem;
-  background-color: rgb(255 178 62 / 12%);
-  .ConteinerInfoFooter {
-    flex: 0 1 20rem;
+  background-color: rgb(255 178 62 / 4%);
+  .FooterInfo {
+    flex: 0 1 100rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
 
-    .MainInfoFooter {
-      flex: 0 1 40rem;
+    .MainFooter {
+      flex: 0 1 80rem;
+      min-height: 20rem;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
 
-      .ContInfoExtra {
-        width: 10rem;
+      .ContInfoFooter {
         display: flex;
-        flex-direction: column;
-        height: 10rem;
+        flex: 0 1 30rem;
         justify-content: space-evenly;
-        .contAbout {
-          p {
-            font-family: "Kreon", serif;
-            font-size: 1.2rem;
-          }
-        }
-        .Extra {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-          height: 7rem;
-          p {
-            color: #b0acac;
-          }
-        }
-
-        ${media.lessThan("30rem")`       
-          text-align:center;
-          width: 100%;
-          align-content:center;
-        `};
-      }
-
-      .InfoFooter {
-        display: flex;
-        flex-direction: column;
-        flex: 0 1 20rem;
         align-items: center;
 
-        .Info {
-          width: 100%;
+        .ContTxtBraun {
+          padding: 0.3rem;
           display: flex;
-          align-items: center;
-          justify-content: start;
-          p {
-            font-family: "Kreon", serif;
-            font-size: 1.2rem;
-          }
-        }
-        .TxtInfo {
-          p {
-            color: #b0acac;
-          }
-        }
-
-        ${media.lessThan("30rem")`       
-      
-        .Info{
-          justify-content:center;  
-        }
-        .TxtInfo{
-          text-align:center;
-          p{
-            padding: 0.5rem;
-          }
-        }
-
-        .ContInfoExtra{
-          width: 100%;
-        }
-        
-      `};
-      }
-
-      ${media.lessThan("30rem")`       
-       flex-wrap:wrap;   
-      `};
-    }
-
-    .MainPrivacys {
-      display: flex;
-      flex: 0 1 30rem;
-      justify-content: space-between;
-      .ContInfoPrivacys {
-        width: 5rem;
-        display: flex;
-        flex-direction: column;
-        height: 7rem;
-        justify-content: space-evenly;
-        .PrivacyInfo {
-          p {
-            font-family: "Kreon", serif;
-            font-size: 1.2rem;
-          }
-        }
-
-        .PolicyTerms {
-          height: 100%;
-          display: flex;
+          max-width: 22rem;
+          height: 10rem;
+          margin-right: 1rem;
           flex-direction: column;
-          justify-content: space-evenly;
-          p {
-            color: #b0acac;
-          }
-         
-        }
-
-        ${media.lessThan("30rem")`       
-        width: 100%;
-        align-items: center;
-        `};
-      }
-
-      .ContContactsFooter {
-        display: flex;
-        flex-direction: column;
-        height: 8rem;
-        justify-content: space-evenly;
-        .contactUs {
-          font-family: "Kreon", serif;
-          font-size: 1.2rem;
-        }
-        .number {
-          p {
-            color: #b0acac;
-          }
-        }
-        .gmail {
-          color: #b0acac;
-        }
-        .ContredesFooters {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          a {
-            display: flex;
-            svg {
-              font-size: 2rem;
+          gap: 1rem;
+          .TitleFooter {
+            p {
+              font-family: Kreon;
+              font-size: var(--step-0);
             }
           }
-          .footerFB {
-            color: rgb(49 84 255);
+        }
+
+        .contAbout {
+          display: flex;
+          flex-direction: column;
+          width: 10rem;
+          height: 10rem;
+          justify-content: space-evenly;
+          .About {
+            p {
+              font-weight: bolder;
+              font-family: Kreon;
+              font-size: 1.1rem;
+            }
           }
-          .footerIM {
-            color: rgb(225 82 142);
-          }
-          .footerWS {
-            color: green;
-          }
-          .footerTwitter {
-            color: #147dff;
+          .AboutTxt {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
           }
         }
+
+        .ContPrivacy {
+          display: flex;
+          width: 10rem;
+          height: 10rem;
+          flex-direction: column;
+          justify-content: space-evenly;
+          .Privacy {
+            p {
+              font-family: Kreon;
+              font-weight: bolder;
+              font-size: 1.1rem;
+            }
+          }
+          .TxtPrivacy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+          }
+          ${media.lessThan("30rem")`   
+       
+            width: 15rem;
+          `};
+        }
+        .ContContactsFooter {
+          display: flex;
+          flex-direction: column;
+          width: 15rem;
+          min-height: 10rem;
+          justify-content: space-evenly;
+          .ContactUs {
+            p {
+              font-family: Kreon;
+              font-weight: bolder;
+              font-size: 1.1rem;
+            }
+          }
+          .ConctRedes {
+            display: flex;
+            justify-content: space-evenly;
+            a {
+              svg {
+                font-size: 2em;
+              }
+              .footerFB {
+                color: rgb(78 83 255);
+              }
+              .footerIM {
+                color: rgb(255 70 164);
+              }
+              .footerWS {
+                color: rgb(38 255 155);
+              }
+              .footerTwitter {
+                color: #167ac6;
+              }
+            }
+          }
+        }
+        .txtFooter {
+          color: #b0acac;
+          font-family: Kreon;
+          max-width: 20rem;
+        }
+
+        ${media.lessThan("57.875rem")`    
+    
+        justify-content:start;
+        
+        `};
+
+        ${media.lessThan("48rem")` 
+        justify-content:space-between;
+        
+        `};
+        ${media.lessThan("30rem")`          
+          flex-wrap:wrap;
+           justify-content:start;
+         `};
       }
 
-      ${media.lessThan("30rem")`       
-    flex-wrap:wrap;   
-    justify-content:center;
-    text-align:center;
-  `};
-    }
+      ${media.lessThan("57.875rem")`   
+       
+      flex-wrap:wrap;
+       `};
 
-    ${media.lessThan("57.875rem")`       
-    flex-wrap:wrap;   
-  `};
+      ${media.lessThan("30rem")`   
+       
+      flex-wrap:wrap;
+      justify-content:start;
+       `};
+    }
   }
+
   .ConteinerTerminosFooter {
-    flex: 0 1 5rem;
+    flex: 0 1 100%;
     display: flex;
     border-top: 0.1rem solid #b0acac;
     padding-top: 1rem;
-    justify-content: space-between;
+    justify-content: center;
     .contCopy {
       display: flex;
       align-items: center;
@@ -212,6 +188,6 @@ export const ContMainFooter = styled.footer`
 
   ${media.lessThan("57.875rem")`       
    
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
   `};
 `;
