@@ -16,16 +16,28 @@ import iconOne from "./img/image 38.svg";
 import iconTwo from "./img/image 39.svg";
 import iconThree from "./img/image 40.svg";
 import iconFour from "./img/image 44.svg";
-import ModalMgs from "../ModalMgs/ModalMgs";
-import { GrFacebook } from "react-icons/gr";
-import { FaInstagram } from "react-icons/fa";
-import { BsWhatsapp } from "react-icons/bs";
+import { m } from "framer-motion";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Firebase/KeyFirebase";
+
+import { useNavigate } from "react-router-dom";
+import Cart from "../../Screen/Menu/ShoppingCart/Cart";
+
 const NavBar = () => {
   const username = sessionStorage.getItem("username");
   const userGoogle = sessionStorage.getItem("usernameGoogle");
   const usernameFacebook = sessionStorage.getItem("usernameFacebook");
-
-  const [openContact, setOpenContact] = useState(false);
+  const [showSubMenu, setShowSubMenu] = useState(false);
+  const navigate = useNavigate();
+  const Close = () => {
+    sessionStorage.clear();
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+        console.log("exit");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -44,7 +56,28 @@ const NavBar = () => {
             <NavLink to={"/home/contact"}>
               <img src={iconThree} alt="Mobilecontact" />
             </NavLink>
-            <img src={User} alt="Mobileuser" />
+            <div>
+              Carrito
+            </div>
+            <div
+              style={{ minHeight: "4.5rem", display:"flex" , alignItems:"center" }}
+              onMouseEnter={() => setShowSubMenu(true)}
+              onMouseLeave={() => setShowSubMenu(false)}
+            >
+              <img src={User} alt="Mobileuser" />
+          <Cart />
+              {showSubMenu && (
+                <m.div
+                  key={showSubMenu}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  style={{ position: "absolute", bottom: "8px" }}
+                >
+                  <button onClick={Close}>Log Out</button>
+                </m.div>
+              )}
+            </div>
           </div>
         </div>
       </NavMobile>
@@ -71,7 +104,25 @@ const NavBar = () => {
           </ContNav>
           <ContUser>
             <p>{username || userGoogle || usernameFacebook}</p>
-            <img src={User} alt="user" />
+            <div
+              style={{ minHeight: "4.5rem" }}
+              onMouseEnter={() => setShowSubMenu(true)}
+              onMouseLeave={() => setShowSubMenu(false)}
+            >
+              <img src={User} alt="user" />
+
+              {showSubMenu && (
+                <m.div
+                  key={showSubMenu}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  style={{ position: "absolute", bottom: "8px" }}
+                >
+                  <button onClick={Close}>Log Out</button>
+                </m.div>
+              )}
+            </div>
           </ContUser>
         </ContMainHome>
       </NavHome>

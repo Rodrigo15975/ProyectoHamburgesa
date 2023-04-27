@@ -9,7 +9,8 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getDatabase, set, ref, child, chi } from "firebase/database";
+
+
 
 // Your web app's Firebase configuration
 const firebaseWeb = {

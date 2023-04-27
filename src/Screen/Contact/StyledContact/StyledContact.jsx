@@ -16,7 +16,7 @@ export const ContMainContact = styled.section`
     position: relative;
     display: flex;
     justify-content: center;
-
+    margin-top: 7rem;
     .contContact {
       flex: 0 1 30rem;
       height: 25rem;

@@ -16,10 +16,12 @@ import media from "styled-media-query";
 //   --step-10: clamp(8.13rem, calc(6.96rem + 5.83vw), 13.97rem);
 
 export const NavHome = styled.nav`
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
   display: flex;
   justify-content: center;
-  background-color: rgb(255 82 82);
+  background: linear-gradient(to right, rgb(255 192 167), rgb(255, 218, 185));
 `;
 
 export const ContMainHome = styled.div`
@@ -133,6 +135,7 @@ export const NavMobile = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0.5 0 0 0.5rem;
 
       .linkMobiles {
         flex: 0 1 25rem;
@@ -148,6 +151,8 @@ export const NavMobile = styled.div`
         a {
           border-radius: 0.5rem;
           transition: background-color 0.2s linear;
+          display: flex;
+          align-items:center;
         }
       }
     }

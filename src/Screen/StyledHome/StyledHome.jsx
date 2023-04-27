@@ -24,9 +24,11 @@ export const MainHome = styled.main`
     flex: 0 1 120rem;
     display: flex;
     justify-content: center;
+    margin-top: 8rem;
     .contBurger {
       flex: 0 1 40rem;
       padding: 0.5rem;
+     
       display: flex;
       flex-direction: column;
       justify-content: center;
