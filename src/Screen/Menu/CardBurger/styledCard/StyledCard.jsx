@@ -7,6 +7,7 @@ export const ContTitleCard = styled.section`
   flex-wrap: wrap;
   font-family: Itim, cursive;
   margin-bottom: 5rem;
+  margin-top: 5rem;
   .card-title {
     flex: 0 1 100%;
     text-align: center;

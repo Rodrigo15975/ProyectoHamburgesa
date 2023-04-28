@@ -17,6 +17,8 @@ import imgFour from "./img/[removal 13.webp";
 import { dbFirestore } from "../../Firebase/KeyFirebase";
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { m } from "framer-motion";
+import { BsCartCheckFill } from "react-icons/bs";
+import Cart from "./ShoppingCart/Cart";
 
 const imgs = {
   imgOne,
@@ -52,9 +54,25 @@ const dataHamburgersRecommended = [
   },
 ];
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.5,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
+
 const Menu = () => {
-  const [hamburgerRecommended, setHamburgerRecommended] = useState([]);
-  const [orderClass, setOrderClass] = useState({});
+  const [hamburgerRecommended, setHamburgerRecommended] = useState([]); 
+  
   const getDatos = () => {
     const docRef = collection(dbFirestore, "hamburgers");
 
@@ -70,6 +88,8 @@ const Menu = () => {
   useEffect(() => {
     getDatos();
   }, []);
+
+
 
   return (
     <>
@@ -94,24 +114,29 @@ const Menu = () => {
 
         <ContMainCard>
           {hamburgerRecommended.length > 0 ? (
-            <article className="ContCards">
-              <m.div className="Cards">
+            <m.article
+              className="ContCards"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              <m.div className="Cards" variants={item}>
                 {hamburgerRecommended.slice(0, 2).map((hamburgers) => (
                   <CardBurger key={hamburgers.id} hamburgers={hamburgers} />
                 ))}
               </m.div>
-              <div className="Cards">
+              <m.div className="Cards" variants={item}>
                 {hamburgerRecommended.slice(2, 4).map((hamburgers) => (
                   <CardBurger key={hamburgers.id} hamburgers={hamburgers} />
                 ))}
-              </div>
-            </article>
+              </m.div>
+            </m.article>
           ) : (
             <h2>Loading...</h2>
           )}
-        </ContMainCard>
-        
+        </ContMainCard>        
       </PageTransition>
+     
       <Footer />
     </>
   );

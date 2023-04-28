@@ -1,15 +1,22 @@
-import React from "react";
-import { MainCart } from "./StyledCart/StyledCart";
+import React, { useState, useEffect } from "react";
 
-const Cart = ({ data }) => {
+import { ContCart, MainCart } from "./StyledCart/StyledCart";
+
+const Cart = ({ openCart, setOpenCart }) => {
+
+
+
+  const closeCart = () => setOpenCart(!openCart);
   return (
     <>
-      <MainCart>
-                     
+      <MainCart onClick={closeCart}>
+        <ContCart onClick={(e) => e.stopPropagation()}>
+          <div className="data">
+            <h2>hola</h2>
+            <button onClick={closeCart}>Exit</button>
+          </div>
+        </ContCart>
       </MainCart>
-
-
-      
     </>
   );
 };

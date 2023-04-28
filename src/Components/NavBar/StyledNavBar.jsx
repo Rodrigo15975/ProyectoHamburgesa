@@ -97,10 +97,10 @@ export const ContNav = styled.div`
   `};
 `;
 export const ContUser = styled.div`
-  flex: 0 1 20rem;
+  flex: 0 1 25rem;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-evenly;
   p {
     font-size: var(--step--1);
     font-family: "Lobster Two", cursive;

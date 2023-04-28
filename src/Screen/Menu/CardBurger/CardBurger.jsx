@@ -2,18 +2,51 @@ import React, { useState, useEffect } from "react";
 
 import { CardsBurger } from "./styledCard/StyledCard";
 import { m } from "framer-motion";
-import { BsFillCartCheckFill } from "react-icons/bs";
+import { BsCartCheckFill, BsFillCartCheckFill } from "react-icons/bs";
+import Cart from "../ShoppingCart/Cart";
+
+const modalTransition = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 20,
+      mass: 0.3,
+      bounce: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 20,
+    },
+  },
+};
 
 const CardBurger = ({ hamburgers }) => {
   const [order, setOrder] = useState(false);
-  const [imgScale, setImgScale] = useState(false);
-  const [urlImg, setUrlImg] = useState(null);
-  const { hamburger, img, type, price } = hamburgers;
 
-  const data = (hamburgers) => {
+  const { hamburger, img, type, price } = hamburgers;
+  const [openCart, setOpenCart] = useState(false);
+  const [addNoticeHamburger, setAddNoticeHamburger] = useState(false);
+
+  const dataHamburgerCard = (hamburgers) => {
+    
     console.log(hamburgers);
   };
-  const sendUrlImg = (img) => img && (setUrlImg(img), setImgScale(true));
+
+  useEffect(() => {
+    
+  }, []);
+
+  const cartVisible = () => setOpenCart(true);
 
   return (
     <>
@@ -41,7 +74,7 @@ const CardBurger = ({ hamburgers }) => {
                 whileTap={{ scale: 1 }}
                 onMouseOver={() => setOrder(true)}
                 onMouseOut={() => setOrder(false)}
-                onClick={() => data(hamburgers)}
+                onClick={ () => dataHamburgerCard(hamburgers)   }
                 key={order}
               >
                 {order ? (
@@ -54,44 +87,42 @@ const CardBurger = ({ hamburgers }) => {
           </div>
         </div>
 
-        <div className="burger-img" onClick={() => sendUrlImg(img)}>
+        <div className="burger-img">
           <m.img whileHover={{ scale: 0.9 }} src={img} alt={"Hamburger"} />
         </div>
       </CardsBurger>
-      {imgScale && (
-        <m.aside
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          key={{ imgScale }}
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "#0000007a",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div style={{ position: "relative" }}>
-            <button
-              style={{
-                position: "absolute",
-                top: "-2rem",
-                height: "2rem",
-                width: "7rem",
-                right: "-2rem",
-                background: "rgb(255, 178, 62)",
-                color: "White",
-              }}
-              onClick={() => setImgScale(false)}
-            >
-              X
-            </button>
-            <img src={urlImg} alt="hamburger" />
-          </div>
-        </m.aside>
-      )}
+
+      <div>
+        {openCart && (
+          <m.div
+            key={openCart}
+            variants={modalTransition}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{ position: "fixed", top: 0, left: 0, zIndex: "29998" }}
+          >
+            <Cart openCart={openCart} setOpenCart={setOpenCart} />
+          </m.div>
+        )}
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          bottom: "2rem",
+          right: "2rem",
+          zIndex: "9997",
+        }}
+        onClick={cartVisible}
+      >
+        <m.div whileHover={{ scale: 1.1, translateY: "-4px" }}>
+          <BsCartCheckFill
+            style={{ fontSize: "3.3rem", color: "#ff6676" }}
+            cursor={"pointer"}
+          />
+        </m.div>
+      </div>
     </>
   );
 };

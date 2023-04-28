@@ -12,7 +12,7 @@ export const MainAbout = styled.section`
   .ContAboutMain {
     flex: 0 1 83rem;
     min-height: 44.4375rem;
-    margin-top: 3rem;
+    margin-top: 10rem;
     background-color: #fff;
     display: flex;
     flex-wrap: wrap;
