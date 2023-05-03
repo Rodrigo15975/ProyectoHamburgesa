@@ -13,6 +13,7 @@ import AboutUs from "./Screen/AboutUs/AboutUs";
 import Menu from "./Screen/Menu/Menu";
 import Layout from "./Layout/Layout";
 import Contact from "./Screen/Contact/Contact";
+import SelectionPago from "./Components/MethodsPago/SelectionPago/SelectionPago";
 function App() {
   const [tokenUser, setTokenUser] = useState(null);
 
@@ -136,6 +137,12 @@ function App() {
                   ) : (
                     <Navigate to={"/"} />
                   )
+                }
+              />
+              <Route
+                path="/home/menu/pago"
+                element={
+                  EnterHome() ? <SelectionPago /> : <Navigate to={"/"} />
                 }
               />
 

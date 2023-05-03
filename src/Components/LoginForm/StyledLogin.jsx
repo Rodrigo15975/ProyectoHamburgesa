@@ -209,7 +209,7 @@ export const ConteinerForm = styled.article`
     flex: 0 1 67%;
     justify-content: center;
     align-items: center;
-    height: 58.8rem;
+    height: 60.8rem;
     flex-direction: column;
 
     ${media.lessThan("57.75rem")`

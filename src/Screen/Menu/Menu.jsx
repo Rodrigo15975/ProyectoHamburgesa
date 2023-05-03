@@ -20,6 +20,32 @@ import { m } from "framer-motion";
 import { BsCartCheckFill } from "react-icons/bs";
 import Cart from "./ShoppingCart/Cart";
 
+//Animacion de la ventana carrito
+const modalTransition = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      damping: 40,
+      mass: 0.5,
+      bounce: 0.5,
+    },
+  },
+  exit: {
+    opacity: 0,
+
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 20,
+    },
+  },
+};
+
 const imgs = {
   imgOne,
   imgTwo,
@@ -54,42 +80,35 @@ const dataHamburgersRecommended = [
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.5,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
-
-
 const Menu = () => {
-  const [hamburgerRecommended, setHamburgerRecommended] = useState([]); 
-  
+  //DBHAMBURGERSRECOMEND
+  const [hamburgerRecommended, setHamburgerRecommended] = useState([]);
+
+  const [openCart, setOpenCart] = useState(false);
+  //ORDEN DE HAMBURUGESAS
+  const [orderRequieredRecommend, setOrderRequieredRecommend] = useState([]);
+
   const getDatos = () => {
     const docRef = collection(dbFirestore, "hamburgers");
 
     onSnapshot(docRef, (onshap) => {
       const hamburgers = onshap.docs.map((data) => {
         const values = data.data();
+        //Los datos se trasnformar en un objeto
         return { id: data.id, ...values };
       });
       setHamburgerRecommended(hamburgers);
     });
   };
 
+  const cartVisible = () => {
+    document.querySelector("html").style.overflowY = "hidden";
+    setOpenCart(true);
+  };
+
   useEffect(() => {
     getDatos();
   }, []);
-
-
 
   return (
     <>
@@ -114,29 +133,81 @@ const Menu = () => {
 
         <ContMainCard>
           {hamburgerRecommended.length > 0 ? (
-            <m.article
-              className="ContCards"
-              variants={container}
-              initial="hidden"
-              animate="show"
-            >
-              <m.div className="Cards" variants={item}>
-                {hamburgerRecommended.slice(0, 2).map((hamburgers) => (
-                  <CardBurger key={hamburgers.id} hamburgers={hamburgers} />
-                ))}
-              </m.div>
-              <m.div className="Cards" variants={item}>
-                {hamburgerRecommended.slice(2, 4).map((hamburgers) => (
-                  <CardBurger key={hamburgers.id} hamburgers={hamburgers} />
-                ))}
-              </m.div>
-            </m.article>
+            <>
+              <m.article className="ContCards">
+                <m.div className="Cards">
+                  {hamburgerRecommended.slice(0, 2).map((hamburgers) => (
+                    <CardBurger
+                      key={`hamburger-${hamburgers.id}`}
+                      hamburgers={hamburgers}
+                      openCart={openCart}
+                      setOpenCart={setOpenCart}
+                      setOrderRequieredRecommend={setOrderRequieredRecommend}
+                      orderRequieredRecommend={orderRequieredRecommend}
+                    />
+                  ))}
+                </m.div>
+                <m.div className="Cards">
+                  {hamburgerRecommended.slice(2, 4).map((hamburgers) => (
+                    <CardBurger
+                      key={`hamburger-card-${hamburgers.id}`}
+                      hamburgers={hamburgers}
+                      openCart={openCart}
+                      setOpenCart={setOpenCart}
+                      setOrderRequieredRecommend={setOrderRequieredRecommend}
+                      orderRequieredRecommend={orderRequieredRecommend}
+                    />
+                  ))}
+                </m.div>
+              </m.article>
+            </>
           ) : (
             <h2>Loading...</h2>
           )}
-        </ContMainCard>        
+
+          {/* la ventana emergente del carrito */}
+          {openCart && (
+            <m.div
+              key={openCart}
+              variants={modalTransition}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                zIndex: "29998",
+              }}
+            >
+              <Cart
+                openCart={openCart}
+                setOpenCart={setOpenCart}
+                orderRequieredRecommend={orderRequieredRecommend}
+                setOrderRequieredRecommend={setOrderRequieredRecommend}
+              />
+            </m.div>
+          )}
+        </ContMainCard>
       </PageTransition>
-     
+
+      <div
+        style={{
+          position: "fixed",
+          bottom: "2rem",
+          right: "2rem",
+          zIndex: "9997",
+        }}
+        onClick={cartVisible}
+      >
+        <m.div whileHover={{ scale: 1.1, translateY: "-4px" }}>
+          <BsCartCheckFill
+            style={{ fontSize: "3.3rem", color: "#ff6676" }}
+            cursor={"pointer"}
+          />
+        </m.div>
+      </div>
+
       <Footer />
     </>
   );
