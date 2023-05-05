@@ -6,7 +6,7 @@ export const ContMainPago = styled.article`
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background-color: black;
+  background-color: #ffffff;
   justify-content: center;
 `;
 

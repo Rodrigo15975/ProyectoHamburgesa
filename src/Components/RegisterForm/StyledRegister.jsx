@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import imgRegister from "./img/img-register.webp";
 export const ContFormRegister = styled.section` 
+
   max-width: 120rem;  
   background-image: url(${imgRegister});
   background-position: center center;
