@@ -22,6 +22,12 @@ const Cart = ({
   const deleteBurger = (id) => {
     const newOrdersBurgers = orderRequieredRecommend.filter((d) => d.id !== id);
     setOrderRequieredRecommend(newOrdersBurgers);
+
+
+    //Nunca te olvides de usar JSON,ya que si es un array
+    // o objetos no leera, solo lee cadenas de strings
+    // pasamos los nuevos datos, una vez que hayamos elimino el pedido que el usuario no quiere
+    localStorage.setItem("burgerOrders", JSON.stringify(newOrdersBurgers));
   };
 
   const pagoSelection = () => {

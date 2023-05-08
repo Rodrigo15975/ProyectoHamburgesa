@@ -11,8 +11,8 @@ export const ContMainPago = styled.article`
 `;
 
 export const MainPago = styled.section`
-  flex: 0 1 25rem;
-  min-height: 25rem;
+  flex: 0 1 45rem;
+  min-height: 49rem;
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
   background-color: white;
   background-image: url(${bg});
@@ -26,9 +26,12 @@ export const MainPago = styled.section`
   padding: 0 1rem 0rem 1rem;
 
   .cont-title {
+    text-align: center;
     h2 {
       font-size: var(--step-2);
+      color: rgb(255 188 37);
     }
+    margin-bottom: 1rem;
   }
   .cont-forma {
     .title-forma {
@@ -88,11 +91,11 @@ export const MainPago = styled.section`
       }
     }
   }
-  .cont-back{
-    button{
+  .cont-back {
+    button {
       background-color: rgb(36 83 255 / 78%);
       color: white;
-      padding: 0.5rem;
+      padding: 1rem;
     }
   }
 `;

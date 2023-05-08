@@ -29,7 +29,10 @@ const CardBurger = ({
   const sendOrder = () => {
     //OTRA FORMA DE HACER QUE NO SE REPITA EL PRODUCTO
     if (!orderRequieredRecommend.includes(hamburgers)) {
-      setOrderRequieredRecommend([...orderRequieredRecommend, hamburgers]);
+      const orderBurger = [...orderRequieredRecommend, hamburgers];
+      localStorage.setItem("burgerOrders", JSON.stringify(orderBurger));
+      //Actualizamos el para que almacene los pedidos del carrito, si no lo haces, no almacenera todo los datos, y se quedara con un dato cada vez que le das al boton
+      setOrderRequieredRecommend(orderBurger);
     }
 
     //fORMA DE NO HACER REPETIR EL PRODUCTO
@@ -45,62 +48,60 @@ const CardBurger = ({
 
   return (
     <>
-      
-        <CardsBurger>
-          <m.div className="data-burger">
-            <m.div
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="data"
-            >
-              <m.div variants={item} className="hamburger-title">
-                <p>{hamburger}</p>
-              </m.div>
-
-              <m.div variants={item} className="hamburger-description">
-                <p>{type}</p>
-              </m.div>
+      <CardsBurger>
+        <m.div className="data-burger">
+          <m.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="data"
+          >
+            <m.div variants={item} className="hamburger-title">
+              <p>{hamburger}</p>
             </m.div>
 
-            <m.div variants={container} className="data">
-              <m.div variants={item} className="hamburger-price">
-                <p>${price}.00</p>
-              </m.div>
-
-              <div className="button-order">
-                <m.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  whileHover={{ scale: 0.95 }}
-                  whileTap={{ scale: 1 }}
-                  onMouseOver={() => setOrderIcon(true)}
-                  onMouseOut={() => setOrderIcon(false)}
-                  // Click para enviar el ordenDatos
-                  onClick={sendOrder}
-                  key={orderIcon}
-                >
-                  {orderIcon ? (
-                    <BsFillCartCheckFill className="iconOrder" />
-                  ) : (
-                    "Order Now "
-                  )}
-                </m.button>
-              </div>
+            <m.div variants={item} className="hamburger-description">
+              <p>{type}</p>
             </m.div>
           </m.div>
 
-          <m.div variants={container} className="burger-img">
-            <m.img
-              whileHover={{ scale: 0.9 }}
-              variants={item}
-              src={img}
-              alt={hamburger}
-            />
+          <m.div variants={container} className="data">
+            <m.div variants={item} className="hamburger-price">
+              <p>${price}.00</p>
+            </m.div>
+
+            <div className="button-order">
+              <m.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                whileHover={{ scale: 0.95 }}
+                whileTap={{ scale: 1 }}
+                onMouseOver={() => setOrderIcon(true)}
+                onMouseOut={() => setOrderIcon(false)}
+                // Click para enviar el ordenDatos
+                onClick={sendOrder}
+                key={orderIcon}
+              >
+                {orderIcon ? (
+                  <BsFillCartCheckFill className="iconOrder" />
+                ) : (
+                  "Order Now "
+                )}
+              </m.button>
+            </div>
           </m.div>
-        </CardsBurger>
-     
+        </m.div>
+
+        <m.div variants={container} className="burger-img">
+          <m.img
+            whileHover={{ scale: 0.9 }}
+            variants={item}
+            src={img}
+            alt={hamburger}
+          />
+        </m.div>
+      </CardsBurger>
     </>
   );
 };

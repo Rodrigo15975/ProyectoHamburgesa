@@ -86,7 +86,10 @@ const Menu = () => {
 
   const [openCart, setOpenCart] = useState(false);
   //ORDEN DE HAMBURUGESAS
-  const [orderRequieredRecommend, setOrderRequieredRecommend] = useState([]);
+  const [orderRequieredRecommend, setOrderRequieredRecommend] = useState(() => {
+    const getBurgers = localStorage.getItem("burgerOrders");
+    return getBurgers ? JSON.parse(getBurgers) : [];
+  });
 
   const getDatos = () => {
     const docRef = collection(dbFirestore, "hamburgers");

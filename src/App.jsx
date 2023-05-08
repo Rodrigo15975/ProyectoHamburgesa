@@ -14,8 +14,7 @@ import Menu from "./Screen/Menu/Menu";
 import Layout from "./Layout/Layout";
 import Contact from "./Screen/Contact/Contact";
 import SelectionPago from "./Components/MethodsPago/SelectionPago/SelectionPago";
-import Visa from "./Components/MethodsPago/Visa/Visa";
-import Paypal from "./Components/MethodsPago/Paypal/Paypal";
+
 function App() {
   const [tokenUser, setTokenUser] = useState(null);
 
@@ -146,14 +145,6 @@ function App() {
                 element={
                   EnterHome() ? <SelectionPago /> : <Navigate to={"/"} />
                 }
-              />
-              <Route
-                path="/home/menu/pago/visa"
-                element={EnterHome() ? <Visa /> : <Navigate to={"/"} />}
-              />
-              <Route
-                path="/home/menu/pago/paypal"
-                element={EnterHome() ? <Paypal /> : <Navigate to={"/"} />}
               />
 
               <Route path="/error" element={<Errorpage />} />
