@@ -117,7 +117,7 @@ const Menu = () => {
     <>
       <PageTransition>
         <MainMenu>
-          <div className="contChangeImg">
+          <div className="contChangeImg" >
             <div className="cont-imgChange">
               <img className="pll1024" src={bgPortada} alt="portada" />
               <img className="pll926" src={bgPortada2} alt="portada" />

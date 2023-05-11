@@ -19,8 +19,25 @@ const item = {
   show: { opacity: 1 },
 };
 
-const CartDataOrder = ({ dataCart, deleteBurger }) => {
+const CartDataOrder = ({ dataCart, deleteBurger, setTotalprice }) => {
   const { type, hamburger, price, img, id } = dataCart;
+  const [amountBurger, setAmountBurger] = useState(0);
+  const [priceForBurger, setPriceForBurger] = useState(0);
+
+  const changeAmountBurger = () => {
+    setAmountBurger((preBurger) => preBurger + 1);
+    setPriceForBurger((prePrice) => prePrice + price);
+    setTotalprice((prevTotalPrice) => prevTotalPrice + price);
+  };
+
+  const changeDecrementBurger = () => {
+    if (amountBurger > 0)
+      return (
+        setAmountBurger((preAmountBurger) => preAmountBurger - 1),
+        setPriceForBurger((prePrice) => prePrice - price),
+        setTotalprice((prevTotalPrice) => prevTotalPrice - price)
+      );
+  };
 
   return (
     <>
@@ -43,11 +60,11 @@ const CartDataOrder = ({ dataCart, deleteBurger }) => {
 
               <div className="BuyPhaseBurger ContbtnAddSubTraction">
                 <div className="btnAddSub">
-                  <button>
+                  <button className="btnAdd" onClick={changeAmountBurger}>
                     <IoMdAdd />
                   </button>
 
-                  <button>
+                  <button className="btnRemove" onClick={changeDecrementBurger}>
                     <GrFormSubtract />
                   </button>
                 </div>
@@ -67,14 +84,14 @@ const CartDataOrder = ({ dataCart, deleteBurger }) => {
                 <div className="buttonBuy">
                   <p>
                     Cantidad
-                    <span className="CountPrice">1</span>
+                    <span className="CountPrice">{amountBurger}</span>
                   </p>
                 </div>
 
                 <div className="buttonBuy">
                   <p>
                     Price
-                    <span className="CountPrice">10</span>
+                    <span className="CountPrice">{priceForBurger}</span>
                   </p>
                 </div>
               </div>

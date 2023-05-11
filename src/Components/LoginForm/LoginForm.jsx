@@ -129,18 +129,18 @@ const LoginForm = ({ title, textLogin, setLoadingState, setTokenUser }) => {
         return setLockedCount(true);
       else return setUnexpected(true);
 
-      // return errorCode === "auth/wrong-password"
-      //   ? setPasswordIncorrect(true)
-      //   : errorCode === "auth/user-not-found"
-      //   ? setEmailNotExit(true)
-      //   : errorCode === "auth/network-request-failed"
-      //   ? setNotConexion(true)
-      //   : errorCode === "auth/too-many-requests"
-      //   ? setLockedCount(true)
-      //   : () =>
-      //       errorCode === "some-other-error-code"
-      //         ? setUnexpected(true)
-      //         : setErrorcount(true);
+      return errorCode === "auth/wrong-password"
+        ? setPasswordIncorrect(true)
+        : errorCode === "auth/user-not-found"
+        ? setEmailNotExit(true)
+        : errorCode === "auth/network-request-failed"
+        ? setNotConexion(true)
+        : errorCode === "auth/too-many-requests"
+        ? setLockedCount(true)
+        : () =>
+            errorCode === "some-other-error-code"
+              ? setUnexpected(true)
+              : setErrorcount(true);
     }
   };
   //Cerrar ModalsErrors login

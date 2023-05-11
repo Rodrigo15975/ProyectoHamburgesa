@@ -5,6 +5,7 @@ import { AnimatePresence, m } from "framer-motion";
 import CartDataOrder from "./CartDataOrder/CartDataOrder";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
 const Cart = ({
   openCart,
@@ -12,8 +13,9 @@ const Cart = ({
   orderRequieredRecommend,
   setOrderRequieredRecommend,
 }) => {
-  const Navigate = useNavigate();
+  const [totalPrice, setTotalprice] = useState(0);
 
+  const Navigate = useNavigate();
   const closeCart = () => {
     document.querySelector("html").style.overflowY = "";
     setOpenCart(!openCart);
@@ -22,7 +24,6 @@ const Cart = ({
   const deleteBurger = (id) => {
     const newOrdersBurgers = orderRequieredRecommend.filter((d) => d.id !== id);
     setOrderRequieredRecommend(newOrdersBurgers);
-
 
     //Nunca te olvides de usar JSON,ya que si es un array
     // o objetos no leera, solo lee cadenas de strings
@@ -57,10 +58,12 @@ const Cart = ({
                     //Pasamos la funcion para eliminar el card, que no desea el usuario
                     exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
                   >
+                    {/* Componenente DEL DATA CARRITO */}
                     <CartDataOrder
                       //Pasamos los datos que el usuario haya pedido en el carrito
                       dataCart={d}
                       deleteBurger={deleteBurger}
+                      setTotalprice={setTotalprice}
                     />
                   </m.div>
                 ))}
@@ -69,15 +72,23 @@ const Cart = ({
               <NotDataCart />
             )}
 
-            {orderRequieredRecommend.length > 0 && (
-              <button
-                onClick={pagoSelection}
-                className="buttonBuyOrder"
-                style={{ width: "100%" }}
-              >
-                Buy <CiMoneyCheck1 />{" "}
-              </button>
-            )}
+            <div className="contBuyBtn">
+              {orderRequieredRecommend.length > 0 && (
+                <m.button
+                  whileHover={{ scale: 0.98 }}
+                  onClick={pagoSelection}
+                  className="buttonBuyOrder"
+                  style={{ width: "100%" }}
+                >
+                  <span className="span-buy">
+                    Buy <CiMoneyCheck1 />
+                  </span>
+                  <span>
+                    Total precio a pagar: <span>{totalPrice}</span>
+                  </span>
+                </m.button>
+              )}
+            </div>
           </m.div>
         </ContCart>
       </MainCart>

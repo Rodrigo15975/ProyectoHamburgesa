@@ -28,11 +28,12 @@ const CardBurger = ({
   const [orderIcon, setOrderIcon] = useState(false);
   const sendOrder = () => {
     //OTRA FORMA DE HACER QUE NO SE REPITA EL PRODUCTO
-    if (!orderRequieredRecommend.includes(hamburgers)) {
-      const orderBurger = [...orderRequieredRecommend, hamburgers];
-      localStorage.setItem("burgerOrders", JSON.stringify(orderBurger));
-      //Actualizamos el para que almacene los pedidos del carrito, si no lo haces, no almacenera todo los datos, y se quedara con un dato cada vez que le das al boton
-      setOrderRequieredRecommend(orderBurger);
+    if (
+      !orderRequieredRecommend.some((product) => product.id === hamburgers.id)
+    ) {
+      const updatedOrder = [...orderRequieredRecommend, hamburgers];
+      localStorage.setItem("burgerOrders", JSON.stringify(updatedOrder));
+      setOrderRequieredRecommend(updatedOrder);
     }
 
     //fORMA DE NO HACER REPETIR EL PRODUCTO
@@ -69,7 +70,6 @@ const CardBurger = ({
             <m.div variants={item} className="hamburger-price">
               <p>${price}.00</p>
             </m.div>
-
             <div className="button-order">
               <m.button
                 initial={{ opacity: 0 }}

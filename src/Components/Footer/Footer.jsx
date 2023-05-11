@@ -1,7 +1,5 @@
 import React from "react";
 import { ContMainFooter } from "./StyledFooter/StyledFooter";
-
-import iconBurger from "./iconBurger.svg";
 import { BsWhatsapp } from "react-icons/bs";
 import { ImFacebook } from "react-icons/im";
 import { FaInstagram } from "react-icons/fa";
@@ -13,8 +11,7 @@ const Footer = () => {
     <>
       <ContMainFooter>
         <div className="FooterInfo">
-          <div className="MainFooter" > 
-
+          <div className="MainFooter">
             <div className="ContInfoFooter">
               <div className="ContTxtBraun">
                 <div className="TitleFooter">
@@ -43,7 +40,6 @@ const Footer = () => {
             </div>
 
             <div className="ContInfoFooter ">
-
               <div className="ContPrivacy">
                 <div className="Privacy">
                   <p>Privacy</p>
@@ -54,9 +50,8 @@ const Footer = () => {
                   <p className="txtFooter">Payment</p>
                   <p className="txtFooter">Terms</p>
                 </div>
-
               </div>
-              
+
               <div className="ContContactsFooter">
                 <div className="ContactUs">
                   <p>Contact Us</p>
@@ -111,7 +106,6 @@ const Footer = () => {
             <p>Terms</p>
           </div>
         </div>
-
       </ContMainFooter>
     </>
   );

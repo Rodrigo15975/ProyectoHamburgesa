@@ -62,8 +62,7 @@ export const ContCart = styled.div`
       background-color: rgb(255 162 66);
       font-family: Itim, cursive;
       min-height: 3rem;
-      position: absolute;
-
+      margin-top: 1rem;
       bottom: 0.2rem;
       color: #fff;
       font-size: var(--step-0);
@@ -73,6 +72,16 @@ export const ContCart = styled.div`
       padding: 0 1rem 0 1rem;
       svg {
         font-size: var(--step-2);
+      }
+    }
+  }
+
+  .contBuyBtn {
+    padding: 0.9rem;
+    button {
+      .span-buy {
+        display: flex;
+        align-items: center;
       }
     }
   }

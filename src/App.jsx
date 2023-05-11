@@ -38,10 +38,12 @@ function App() {
       return !!savedTokenFacebook;
     }
   };
+
   useEffect(() => {
     //Almacena el valor, dependiendo del resultado, true, para ingresar, falso para no ingresar
     EnterHome();
 
+    //-------------
     //Funciones que verifican la conexion
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
