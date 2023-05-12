@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import media from "styled-media-query";
+
 //No data Cart Styled
 
 import bgNotData from "../img/side-wave_background.png";
@@ -20,6 +22,8 @@ export const ContNotData = styled.div`
       color: red;
     }
   }
+
+  
 `;
 
 //---------------
@@ -41,6 +45,7 @@ export const ContCart = styled.div`
   background-color: #fff;
   height: 100%;
   width: 40rem;
+  
   display: flex;
   justify-content: center;
   overflow-y: scroll;
@@ -85,4 +90,11 @@ export const ContCart = styled.div`
       }
     }
   }
+
+  ${media.lessThan("48rem")`    
+    
+  width: 100%;
+   `};
+
 `;
+

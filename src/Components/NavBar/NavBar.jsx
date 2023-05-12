@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { NavLink } from "react-router-dom";
 import Burger from "./img/iconBurger.svg";
@@ -21,8 +21,6 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../Firebase/KeyFirebase";
 
 import { useNavigate } from "react-router-dom";
-import Cart from "../../Screen/Menu/ShoppingCart/Cart";
-import { BsCartCheckFill } from "react-icons/bs";
 
 const NavBar = () => {
   const username = sessionStorage.getItem("username");
@@ -57,7 +55,7 @@ const NavBar = () => {
             <NavLink to={"/home/contact"}>
               <img src={iconThree} alt="Mobilecontact" />
             </NavLink>
-            <div>Carrito</div>
+           
             <div
               style={{
                 minHeight: "4.5rem",

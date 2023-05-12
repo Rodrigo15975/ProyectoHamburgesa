@@ -194,10 +194,12 @@ const Menu = () => {
         </ContMainCard>
       </PageTransition>
 
+
+{/* ICON CARRITO */}
       <div
         style={{
           position: "fixed",
-          bottom: "2rem",
+          bottom: "5rem",
           right: "2rem",
           zIndex: "9997",
         }}
